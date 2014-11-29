@@ -1,6 +1,6 @@
 
 /*
- * shariff - v1.4.1 - 28.11.2014
+ * shariff - v1.4.2 - 29.11.2014
  * https://github.com/heiseonline/shariff
  * Copyright (c) 2014 Ines Pauer, Philipp Busse, Sebastian Hilbig, Erich Kramer, Deniz Sesli
  * Licensed under the MIT <http://www.opensource.org/licenses/mit-license.php> license
@@ -10419,7 +10419,6 @@ module.exports = function(shariff) {
         shareUrl: 'whatsapp://send?text=' + shariff.getShareText() + '%20' + shariff.getURL() + shariff.getReferrerTrack()
     };
 };
-
 },{}],8:[function(require,module,exports){
 (function (global){
 'use strict';
@@ -10535,13 +10534,23 @@ _Shariff.prototype = {
         return ( typeof url === 'function' ) ? $.proxy(url, this)() : url;
     },
 
+    getService: function() {
+        var service = this.options.service;
+        return ( typeof service === 'function' ) ? $.proxy(service, this)() : service;
+    },
+
+    getTTL: function() {
+        var ttl = this.options.ttl;
+        return ( typeof ttl === 'function' ) ? $.proxy(ttl, this)() : ttl;
+    },
+	
     getReferrerTrack: function() {
         return this.options.referrerTrack || '';
     },
 
     // returns shareCounts of document
     getShares: function() {
-        return $.getJSON(this.options.backendUrl + '?url=' + encodeURIComponent(this.getURL()));
+        return $.getJSON(this.options.backendUrl + '?url=' + encodeURIComponent(this.getURL()) + '&ttl=' + encodeURIComponent(this.getTTL()) + '&service=' + encodeURIComponent(this.getService()));
     },
 
     // add value of shares for each service

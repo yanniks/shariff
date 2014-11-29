@@ -111,13 +111,23 @@ _Shariff.prototype = {
         return ( typeof url === 'function' ) ? $.proxy(url, this)() : url;
     },
 
+    getService: function() {
+        var service = this.options.service;
+        return ( typeof service === 'function' ) ? $.proxy(service, this)() : service;
+    },
+
+    getTTL: function() {
+        var ttl = this.options.ttl;
+        return ( typeof ttl === 'function' ) ? $.proxy(ttl, this)() : ttl;
+    },
+	
     getReferrerTrack: function() {
         return this.options.referrerTrack || '';
     },
 
     // returns shareCounts of document
     getShares: function() {
-        return $.getJSON(this.options.backendUrl + '?url=' + encodeURIComponent(this.getURL()));
+        return $.getJSON(this.options.backendUrl + '?url=' + encodeURIComponent(this.getURL()) + '&ttl=' + encodeURIComponent(this.getTTL()) + '&service=' + encodeURIComponent(this.getService()));
     },
 
     // add value of shares for each service
