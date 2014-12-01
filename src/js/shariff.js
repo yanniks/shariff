@@ -17,7 +17,8 @@ var _Shariff = function(element, options) {
         require('./services/twitter'),
         require('./services/whatsapp'),
         require('./services/mail'),
-        require('./services/info')
+        require('./services/info'),
+        require('./services/linkedin')
     ];
 
     // filter available services to those that are enabled and initialize them

@@ -41,6 +41,23 @@
                 -moz-osx-font-smoothing: grayscale;
             }
         }
+        &.linkedin {
+            a {
+                padding-left: 24px;
+                background-color: #007bb6;
+                &:hover {
+                    background-color: #1488bf;
+                }
+                &::before {
+                    content:"\f0e1";
+                    font-size: 17px;
+                }
+            }
+            .share_count {
+                color: #183a75;
+                background-color: #99adcf;
+            }
+        }
         &.facebook {
             a {
                 padding-left: 24px;
@@ -144,7 +161,7 @@
     }
     // ------------------------- colourless design
     .theme-grey {
-        .twitter, .facebook, .googleplus, .mail, .whatsapp {
+        .twitter, .facebook, .googleplus, .mail, .whatsapp, .linkedin {
             a {
                 background-color: #b0b0b0;
             }
@@ -158,6 +175,9 @@
         }
         .facebook a:hover {
             background-color: #3b5998;
+        }
+        .linkedin a:hover {
+            background-color: #007bb6;
         }
 		.whatsapp a:hover {
 			background-color: #5cbe4a;
@@ -189,6 +209,9 @@
         }
         .facebook a {
             color: #3b5998;
+        }
+        .linkedin a {
+            color: #007bb6;
         }
         .googleplus a {
             color: #d34836;

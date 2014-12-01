@@ -10374,6 +10374,26 @@ module.exports = function(shariff) {
 'use strict';
 
 module.exports = function(shariff) {
+    var liEncUrl = encodeURIComponent(shariff.getURL());
+    return {
+        popup: true,
+        shareText: {
+            'de': 'teilen',
+            'en': 'share'
+        },
+        name: 'linkedin',
+        title: {
+            'de': 'Bei LinkedIn teilen',
+            'en': 'Share on LinkedIn'
+        },
+        shareUrl: 'https://www.linkedin.com/shareArticle?mini=true&url=' + liEncUrl + shariff.getReferrerTrack() + '&title=' + shariff.getShareText() + '&summary=&source='
+    };
+};
+
+},{}],6:[function(require,module,exports){
+'use strict';
+
+module.exports = function(shariff) {
     return {
         popup: false,
         shareText: 'mail',
@@ -10386,7 +10406,7 @@ module.exports = function(shariff) {
     };
 };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -10404,7 +10424,7 @@ module.exports = function(shariff) {
     };
 };
 
-},{"jquery":1}],7:[function(require,module,exports){
+},{"jquery":1}],8:[function(require,module,exports){
 'use strict';
 
 module.exports = function(shariff) {
@@ -10419,7 +10439,7 @@ module.exports = function(shariff) {
         shareUrl: 'whatsapp://send?text=' + shariff.getShareText() + '%20' + shariff.getURL() + shariff.getReferrerTrack()
     };
 };
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -10440,7 +10460,8 @@ var _Shariff = function(element, options) {
         require('./services/twitter'),
         require('./services/whatsapp'),
         require('./services/mail'),
-        require('./services/info')
+        require('./services/info'),
+        require('./services/linkedin')
     ];
 
     // filter available services to those that are enabled and initialize them
@@ -10650,4 +10671,4 @@ $('.shariff').each(function() {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./services/facebook":2,"./services/googleplus":3,"./services/info":4,"./services/mail":5,"./services/twitter":6,"./services/whatsapp":7,"jquery":1}]},{},[8]);
+},{"./services/facebook":2,"./services/googleplus":3,"./services/info":4,"./services/linkedin":5,"./services/mail":6,"./services/twitter":7,"./services/whatsapp":8,"jquery":1}]},{},[9]);
