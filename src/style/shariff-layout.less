@@ -41,6 +41,23 @@
                 -moz-osx-font-smoothing: grayscale;
             }
         }
+        &.pinterest {
+            a {
+                padding-left: 24px;
+                background-color: #cb2027;
+                &:hover {
+                    background-color: #e70f18;
+                }
+                &::before {
+                    content:"\f0d2";
+                    font-size: 17px;
+                }
+            }
+            .share_count {
+                color: #a71a20;
+                background-color: #ff050f;
+            }
+        }
         &.linkedin {
             a {
                 padding-left: 24px;
@@ -161,7 +178,7 @@
     }
     // ------------------------- colourless design
     .theme-grey {
-        .twitter, .facebook, .googleplus, .mail, .whatsapp, .linkedin {
+        .twitter, .facebook, .googleplus, .mail, .whatsapp, .linkedin, .pinterest {
             a {
                 background-color: #b0b0b0;
             }
@@ -184,6 +201,9 @@
 		}
         .googleplus a:hover {
             background-color: #d34836;
+        }
+        .pinterest a:hover {
+            background-color: #cb2027;
         }
         .send_by_email a:hover {
             background-color: #999;
@@ -215,6 +235,9 @@
         }
         .googleplus a {
             color: #d34836;
+        }
+        .pinterest a {
+            color: #9a2718;
         }
 		.whatsapp a {
 			color: #508144;

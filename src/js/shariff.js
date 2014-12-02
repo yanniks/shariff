@@ -18,7 +18,8 @@ var _Shariff = function(element, options) {
         require('./services/whatsapp'),
         require('./services/mail'),
         require('./services/info'),
-        require('./services/linkedin')
+        require('./services/linkedin'),
+        require('./services/pinterest')
     ];
 
     // filter available services to those that are enabled and initialize them
@@ -106,6 +107,10 @@ _Shariff.prototype = {
     getInfoUrl: function() {
         return this.options.infoUrl;
     },
+	
+	getImageUrl: function() {
+		return this.options.image;
+	},
 
     getURL: function() {
         var url = this.options.url;

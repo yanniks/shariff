@@ -1,6 +1,6 @@
 
 /*
- * shariff - v1.4.5 - 01.12.2014
+ * shariff - v1.4.5 - 02.12.2014
  * https://github.com/heiseonline/shariff
  * Copyright (c) 2014 Ines Pauer, Philipp Busse, Sebastian Hilbig, Erich Kramer, Deniz Sesli
  * Licensed under the MIT <http://www.opensource.org/licenses/mit-license.php> license
@@ -10409,6 +10409,26 @@ module.exports = function(shariff) {
 },{}],7:[function(require,module,exports){
 'use strict';
 
+module.exports = function(shariff) {
+    var EncUrl = encodeURIComponent(shariff.getURL());
+    return {
+        popup: true,
+        shareText: {
+            'de': 'Pin it',
+            'en': 'Pin it'
+        },
+        name: 'pinterest',
+        title: {
+            'de': 'Bei Pinterest pinnen',
+            'en': 'Pin it on Pinterest'
+        },
+		shareUrl: '//www.pinterest.com/pin/create/button/?url=' + EncUrl + shariff.getReferrerTrack() + '&media=' + shariff.getImageUrl() + '&description=' + shariff.getShareText()
+    };
+};
+
+},{}],8:[function(require,module,exports){
+'use strict';
+
 var $ = require('jquery');
 
 module.exports = function(shariff) {
@@ -10424,7 +10444,7 @@ module.exports = function(shariff) {
     };
 };
 
-},{"jquery":1}],8:[function(require,module,exports){
+},{"jquery":1}],9:[function(require,module,exports){
 'use strict';
 
 module.exports = function(shariff) {
@@ -10439,7 +10459,7 @@ module.exports = function(shariff) {
         shareUrl: 'whatsapp://send?text=' + shariff.getShareText() + '%20' + shariff.getURL() + shariff.getReferrerTrack()
     };
 };
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -10461,7 +10481,8 @@ var _Shariff = function(element, options) {
         require('./services/whatsapp'),
         require('./services/mail'),
         require('./services/info'),
-        require('./services/linkedin')
+        require('./services/linkedin'),
+        require('./services/pinterest')
     ];
 
     // filter available services to those that are enabled and initialize them
@@ -10549,6 +10570,10 @@ _Shariff.prototype = {
     getInfoUrl: function() {
         return this.options.infoUrl;
     },
+	
+	getImageUrl: function() {
+		return this.options.image;
+	},
 
     getURL: function() {
         var url = this.options.url;
@@ -10671,4 +10696,4 @@ $('.shariff').each(function() {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./services/facebook":2,"./services/googleplus":3,"./services/info":4,"./services/linkedin":5,"./services/mail":6,"./services/twitter":7,"./services/whatsapp":8,"jquery":1}]},{},[9]);
+},{"./services/facebook":2,"./services/googleplus":3,"./services/info":4,"./services/linkedin":5,"./services/mail":6,"./services/pinterest":7,"./services/twitter":8,"./services/whatsapp":9,"jquery":1}]},{},[10]);
