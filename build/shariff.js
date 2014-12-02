@@ -10402,7 +10402,7 @@ module.exports = function(shariff) {
             'de': 'Per E-Mail versenden',
             'en': 'Send by email'
         },
-        shareUrl: shariff.getURL() + '?view=mail'
+        shareUrl: 'mailto:?body=' + encodeURIComponent(shariff.getURL()) + shariff.getReferrerTrack() + '&subject=' + shariff.getShareText()
     };
 };
 
@@ -10460,6 +10460,26 @@ module.exports = function(shariff) {
     };
 };
 },{}],10:[function(require,module,exports){
+'use strict';
+
+module.exports = function(shariff) {
+    var EncUrl = encodeURIComponent(shariff.getURL());
+    return {
+        popup: true,
+        shareText: {
+            'de': 'teilen',
+            'en': 'teilen'
+        },
+        name: 'xing',
+        title: {
+            'de': 'Bei XING teilen',
+            'en': 'Share on XING'
+        },
+		shareUrl: '//www.xing.com/social_plugins/share?url=' + EncUrl + shariff.getReferrerTrack()
+    };
+};
+
+},{}],11:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -10482,6 +10502,7 @@ var _Shariff = function(element, options) {
         require('./services/mail'),
         require('./services/info'),
         require('./services/linkedin'),
+		require('./services/xing'),
         require('./services/pinterest')
     ];
 
@@ -10696,4 +10717,4 @@ $('.shariff').each(function() {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./services/facebook":2,"./services/googleplus":3,"./services/info":4,"./services/linkedin":5,"./services/mail":6,"./services/pinterest":7,"./services/twitter":8,"./services/whatsapp":9,"jquery":1}]},{},[10]);
+},{"./services/facebook":2,"./services/googleplus":3,"./services/info":4,"./services/linkedin":5,"./services/mail":6,"./services/pinterest":7,"./services/twitter":8,"./services/whatsapp":9,"./services/xing":10,"jquery":1}]},{},[11]);

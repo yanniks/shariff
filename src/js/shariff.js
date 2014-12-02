@@ -19,6 +19,7 @@ var _Shariff = function(element, options) {
         require('./services/mail'),
         require('./services/info'),
         require('./services/linkedin'),
+		require('./services/xing'),
         require('./services/pinterest')
     ];
 
