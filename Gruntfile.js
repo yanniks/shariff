@@ -182,7 +182,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-hapi');
 
     grunt.registerTask('test', ['jshint']);
-    grunt.registerTask('build', ['test', 'less:demo', 'less:dist', 'browserify:dist', 'browserify:dist_min'])
+    grunt.registerTask('build', ['test', 'less:demo', 'less:dist', 'browserify:dist', 'browserify:dist_min']);
     grunt.registerTask('demo', ['copy:demo', 'less:demo', 'browserify:demo', 'hapi', 'configureProxies:demo', 'connect']);
     grunt.registerTask('default', ['test', 'browserify:dev']);
 };
