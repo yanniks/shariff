@@ -128,13 +128,18 @@ _Shariff.prototype = {
         return ( typeof ttl === 'function' ) ? $.proxy(ttl, this)() : ttl;
     },
 	
+    getTemp: function() {
+        var temp = this.options.temp;
+        return ( typeof temp === 'function' ) ? $.proxy(temp, this)() : temp;
+    },
+	
     getReferrerTrack: function() {
         return this.options.referrerTrack || '';
     },
 
     // returns shareCounts of document
     getShares: function() {
-        return $.getJSON(this.options.backendUrl + '?url=' + encodeURIComponent(this.getURL()) + '&ttl=' + encodeURIComponent(this.getTTL()) + '&service=' + encodeURIComponent(this.getService()));
+        return $.getJSON(this.options.backendUrl + '?url=' + encodeURIComponent(this.getURL()) + '&temp=' + encodeURIComponent(this.getTemp()) + '&ttl=' + encodeURIComponent(this.getTTL()) + '&service=' + encodeURIComponent(this.getService()));
     },
 
     // add value of shares for each service

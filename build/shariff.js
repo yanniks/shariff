@@ -1,6 +1,6 @@
 
 /*
- * shariff - v1.4.6 - 04.12.2014
+ * shariff - v1.4.6 - 05.12.2014
  * https://github.com/heiseonline/shariff
  * Copyright (c) 2014 Ines Pauer, Philipp Busse, Sebastian Hilbig, Erich Kramer, Deniz Sesli
  * Licensed under the MIT <http://www.opensource.org/licenses/mit-license.php> license
@@ -10609,13 +10609,18 @@ _Shariff.prototype = {
         return ( typeof ttl === 'function' ) ? $.proxy(ttl, this)() : ttl;
     },
 	
+    getTemp: function() {
+        var temp = this.options.temp;
+        return ( typeof temp === 'function' ) ? $.proxy(temp, this)() : temp;
+    },
+	
     getReferrerTrack: function() {
         return this.options.referrerTrack || '';
     },
 
     // returns shareCounts of document
     getShares: function() {
-        return $.getJSON(this.options.backendUrl + '?url=' + encodeURIComponent(this.getURL()) + '&ttl=' + encodeURIComponent(this.getTTL()) + '&service=' + encodeURIComponent(this.getService()));
+        return $.getJSON(this.options.backendUrl + '?url=' + encodeURIComponent(this.getURL()) + '&temp=' + encodeURIComponent(this.getTemp()) + '&ttl=' + encodeURIComponent(this.getTTL()) + '&service=' + encodeURIComponent(this.getService()));
     },
 
     // add value of shares for each service
