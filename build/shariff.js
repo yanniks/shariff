@@ -10324,6 +10324,7 @@ module.exports = function(shariff) {
     var fbEncUrl = encodeURIComponent(shariff.getURL());
     return {
         popup: true,
+		noblank: false,
         shareText: {
             'de': 'teilen',
             'en': 'share'
@@ -10343,6 +10344,7 @@ module.exports = function(shariff) {
 module.exports = function(shariff) {
     return {
         popup: true,
+		noblank: false,
         shareText: '+1',
         name: 'googleplus',
         title: {
@@ -10360,6 +10362,7 @@ module.exports = function(shariff) {
 module.exports = function(shariff) {
     return {
         popup: false,
+		noblank: false,
         shareText: 'Info',
         name: 'info',
         title: {
@@ -10377,6 +10380,7 @@ module.exports = function(shariff) {
     var liEncUrl = encodeURIComponent(shariff.getURL());
     return {
         popup: true,
+		noblank: false,
         shareText: {
             'de': 'teilen',
             'en': 'share'
@@ -10396,6 +10400,7 @@ module.exports = function(shariff) {
 module.exports = function(shariff) {
     return {
         popup: false,
+		noblank: false,
         shareText: 'mail',
         name: 'mail',
         title: {
@@ -10413,6 +10418,7 @@ module.exports = function(shariff) {
     var EncUrl = encodeURIComponent(shariff.getURL());
     return {
         popup: true,
+		noblank: false,
         shareText: {
             'de': 'Pin it',
             'en': 'Pin it'
@@ -10432,6 +10438,7 @@ module.exports = function(shariff) {
 module.exports = function(shariff) {
     return {
         popup: true,
+		noblank: false,
         shareText: 'tweet',
         name: 'twitter',
         title: {
@@ -10448,6 +10455,7 @@ module.exports = function(shariff) {
 module.exports = function(shariff) {
     return {
         popup: false,
+		noblank: true,
         shareText: 'WhatsApp',
         name: 'whatsapp',
         title: {
@@ -10464,6 +10472,7 @@ module.exports = function(shariff) {
     var EncUrl = encodeURIComponent(shariff.getURL());
     return {
         popup: true,
+		noblank: false,
         shareText: {
             'de': 'teilen',
             'en': 'teilen'
@@ -10656,6 +10665,8 @@ _Shariff.prototype = {
 
             if (service.popup) {
                 $shareLink.attr('rel', 'popup');
+			} else if (service.noblank) {
+				
             } else {
                 $shareLink.attr('target', '_blank');
             }

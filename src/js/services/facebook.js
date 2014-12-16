@@ -4,6 +4,7 @@ module.exports = function(shariff) {
     var fbEncUrl = encodeURIComponent(shariff.getURL());
     return {
         popup: true,
+		noblank: false,
         shareText: {
             'de': 'teilen',
             'en': 'share'

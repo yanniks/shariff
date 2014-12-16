@@ -175,6 +175,8 @@ _Shariff.prototype = {
 
             if (service.popup) {
                 $shareLink.attr('rel', 'popup');
+			} else if (service.noblank) {
+				
             } else {
                 $shareLink.attr('target', '_blank');
             }
