@@ -1,6 +1,6 @@
 
 /*
- * shariff - v1.4.6 - 11.12.2014
+ * shariff - v1.4.7 - 16.12.2014
  * https://github.com/heiseonline/shariff
  * Copyright (c) 2014 Ines Pauer, Philipp Busse, Sebastian Hilbig, Erich Kramer, Deniz Sesli
  * Licensed under the MIT <http://www.opensource.org/licenses/mit-license.php> license
@@ -10402,7 +10402,7 @@ module.exports = function(shariff) {
             'de': 'Per E-Mail versenden',
             'en': 'Send by email'
         },
-        shareUrl: 'mailto:?body=' + encodeURIComponent(shariff.getURL()) + shariff.getReferrerTrack() + '&subject=' + shariff.getShareText()
+        shareUrl: 'mailto:?body=' + encodeURIComponent(shariff.getURL() + shariff.getReferrerTrack()) + '&subject=' + shariff.getShareText()
     };
 };
 
