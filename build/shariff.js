@@ -1,6 +1,6 @@
 
 /*
- * shariff - v1.4.7 - 16.12.2014
+ * shariff - v1.4.7 - 28.12.2014
  * https://github.com/heiseonline/shariff
  * Copyright (c) 2014 Ines Pauer, Philipp Busse, Sebastian Hilbig, Erich Kramer, Deniz Sesli
  * Licensed under the MIT <http://www.opensource.org/licenses/mit-license.php> license
@@ -10327,12 +10327,14 @@ module.exports = function(shariff) {
 		noblank: false,
         shareText: {
             'de': 'teilen',
-            'en': 'share'
+            'en': 'share',
+            'es': 'compartir'
         },
         name: 'facebook',
         title: {
             'de': 'Bei Facebook teilen',
-            'en': 'Share on Facebook'
+            'en': 'Share on Facebook',
+            'es': 'Compartir en Facebook'
         },
         shareUrl: 'https://www.facebook.com/sharer/sharer.php?u=' + fbEncUrl + shariff.getReferrerTrack()
     };
@@ -10349,7 +10351,8 @@ module.exports = function(shariff) {
         name: 'googleplus',
         title: {
             'de': 'Bei Google+ teilen',
-            'en': 'Share on Google+'
+            'en': 'Share on Google+',
+            'es': 'Compartir en Google+'
         },
         shareUrl: 'https://plus.google.com/share?url=' + shariff.getURL() + shariff.getReferrerTrack()
     };
@@ -10367,7 +10370,8 @@ module.exports = function(shariff) {
         name: 'info',
         title: {
             'de': 'weitere Informationen',
-            'en': 'more information'
+            'en': 'more information',
+            'es': 'Más informaciones'
         },
         shareUrl: shariff.getInfoUrl()
     };
@@ -10405,7 +10409,8 @@ module.exports = function(shariff) {
         name: 'mail',
         title: {
             'de': 'Per E-Mail versenden',
-            'en': 'Send by email'
+            'en': 'Send by email',
+            'es': 'Enviar por email'
         },
         shareUrl: 'mailto:?body=' + encodeURIComponent(shariff.getURL() + shariff.getReferrerTrack()) + '&subject=' + shariff.getShareText()
     };
@@ -10443,7 +10448,8 @@ module.exports = function(shariff) {
         name: 'twitter',
         title: {
             'de': 'Bei Twitter teilen',
-            'en': 'Share on Twitter'
+            'en': 'Share on Twitter',
+            'es': 'Compartir en Twitter'
         },
         shareUrl: 'https://twitter.com/intent/tweet?text='+ shariff.getShareText() + '&url=' + shariff.getURL() + shariff.getReferrerTrack()
     };
@@ -10460,7 +10466,8 @@ module.exports = function(shariff) {
         name: 'whatsapp',
         title: {
             'de': 'Bei Whatsapp teilen',
-            'en': 'Share on Whatsapp'
+            'en': 'Share on Whatsapp',
+            'es': 'Compartir en Whatsapp'
         },
         shareUrl: 'whatsapp://send?text=' + shariff.getShareText() + '%20' + shariff.getURL() + shariff.getReferrerTrack()
     };
