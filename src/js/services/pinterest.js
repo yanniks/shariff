@@ -7,12 +7,14 @@ module.exports = function(shariff) {
 		noblank: false,
         shareText: {
             'de': 'Pin it',
-            'en': 'Pin it'
+            'en': 'Pin it',
+			'es': 'Pin it'
         },
         name: 'pinterest',
         title: {
             'de': 'Bei Pinterest pinnen',
-            'en': 'Pin it on Pinterest'
+            'en': 'Pin it on Pinterest',
+			'es': 'Compartir en Pinterest'
         },
 		shareUrl: '//www.pinterest.com/pin/create/button/?url=' + EncUrl + shariff.getReferrerTrack() + '&media=' + shariff.getImageUrl() + '&description=' + shariff.getShareText()
     };

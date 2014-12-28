@@ -7,12 +7,14 @@ module.exports = function(shariff) {
 		noblank: false,
         shareText: {
             'de': 'teilen',
-            'en': 'share'
+            'en': 'share',
+			'es': 'compartir'
         },
         name: 'linkedin',
         title: {
             'de': 'Bei LinkedIn teilen',
-            'en': 'Share on LinkedIn'
+            'en': 'Share on LinkedIn',
+			'es': 'Compartir en LinkedIn'
         },
         shareUrl: 'https://www.linkedin.com/shareArticle?mini=true&url=' + liEncUrl + shariff.getReferrerTrack() + '&title=' + shariff.getShareText() + '&summary=&source='
     };
