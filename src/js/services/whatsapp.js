@@ -12,6 +12,6 @@ module.exports = function(shariff) {
             'en': 'Share on Whatsapp',
             'es': 'Compartir en Whatsapp'
         },
-        shareUrl: 'whatsapp://send?text=' + shariff.getShareText() + '%20' + shariff.getURL() + shariff.getReferrerTrack()
+        shareUrl: 'whatsapp://send?text=' + shariff.getShareText() + '%20' + encodeURIComponent(shariff.getURL() + shariff.getReferrerTrack())
     };
 };
