@@ -5,6 +5,7 @@ module.exports = function(shariff) {
     return {
         popup: true,
 		noblank: false,
+		mobileonly: false,
         shareText: {
             'de': 'teilen',
             'en': 'share',

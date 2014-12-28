@@ -8,6 +8,8 @@
 
 
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+module.exports = window;
+},{}],2:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v1.11.1
  * http://jquery.com/
@@ -10317,7 +10319,7 @@ return jQuery;
 
 }));
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 'use strict';
 
 module.exports = function(shariff) {
@@ -10325,6 +10327,7 @@ module.exports = function(shariff) {
     return {
         popup: true,
 		noblank: false,
+		mobileonly: false,
         shareText: {
             'de': 'teilen',
             'en': 'share',
@@ -10340,13 +10343,14 @@ module.exports = function(shariff) {
     };
 };
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 
 module.exports = function(shariff) {
     return {
         popup: true,
 		noblank: false,
+		mobileonly: false,
         shareText: '+1',
         name: 'googleplus',
         title: {
@@ -10359,13 +10363,14 @@ module.exports = function(shariff) {
 };
 
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 module.exports = function(shariff) {
     return {
         popup: false,
 		noblank: false,
+		mobileonly: false,
         shareText: 'Info',
         name: 'info',
         title: {
@@ -10377,7 +10382,7 @@ module.exports = function(shariff) {
     };
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 module.exports = function(shariff) {
@@ -10385,26 +10390,30 @@ module.exports = function(shariff) {
     return {
         popup: true,
 		noblank: false,
+		mobileonly: false,
         shareText: {
             'de': 'teilen',
-            'en': 'share'
+            'en': 'share',
+			'es': 'compartir'
         },
         name: 'linkedin',
         title: {
             'de': 'Bei LinkedIn teilen',
-            'en': 'Share on LinkedIn'
+            'en': 'Share on LinkedIn',
+			'es': 'Compartir en LinkedIn'
         },
         shareUrl: 'https://www.linkedin.com/shareArticle?mini=true&url=' + liEncUrl + shariff.getReferrerTrack() + '&title=' + shariff.getShareText() + '&summary=&source='
     };
 };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 module.exports = function(shariff) {
     return {
         popup: false,
 		noblank: false,
+		mobileonly: false,
         shareText: 'mail',
         name: 'mail',
         title: {
@@ -10416,7 +10425,7 @@ module.exports = function(shariff) {
     };
 };
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 module.exports = function(shariff) {
@@ -10424,26 +10433,30 @@ module.exports = function(shariff) {
     return {
         popup: true,
 		noblank: false,
+		mobileonly: false,
         shareText: {
             'de': 'Pin it',
-            'en': 'Pin it'
+            'en': 'Pin it',
+			'es': 'Pin it'
         },
         name: 'pinterest',
         title: {
             'de': 'Bei Pinterest pinnen',
-            'en': 'Pin it on Pinterest'
+            'en': 'Pin it on Pinterest',
+			'es': 'Compartir en Pinterest'
         },
 		shareUrl: '//www.pinterest.com/pin/create/button/?url=' + EncUrl + shariff.getReferrerTrack() + '&media=' + shariff.getImageUrl() + '&description=' + shariff.getShareText()
     };
 };
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 module.exports = function(shariff) {
     return {
         popup: true,
 		noblank: false,
+		mobileonly: false,
         shareText: 'tweet',
         name: 'twitter',
         title: {
@@ -10455,13 +10468,14 @@ module.exports = function(shariff) {
     };
 };
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 module.exports = function(shariff) {
     return {
         popup: false,
 		noblank: true,
+		mobileonly: true,
         shareText: 'WhatsApp',
         name: 'whatsapp',
         title: {
@@ -10472,7 +10486,7 @@ module.exports = function(shariff) {
         shareUrl: 'whatsapp://send?text=' + shariff.getShareText() + '%20' + shariff.getURL() + shariff.getReferrerTrack()
     };
 };
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 module.exports = function(shariff) {
@@ -10480,24 +10494,28 @@ module.exports = function(shariff) {
     return {
         popup: true,
 		noblank: false,
+		mobileonly: false,
         shareText: {
             'de': 'teilen',
-            'en': 'teilen'
+            'en': 'share',
+			'es': 'compartir'
         },
         name: 'xing',
         title: {
             'de': 'Bei XING teilen',
-            'en': 'Share on XING'
+            'en': 'Share on XING',
+			'es': 'Compartir en XING'
         },
 		shareUrl: '//www.xing.com/social_plugins/share?url=' + EncUrl + shariff.getReferrerTrack()
     };
 };
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 (function (global){
 'use strict';
 
 var $ = require('jquery');
+var window = require('browserify-window');
 
 var _Shariff = function(element, options) {
     var self = this;
@@ -10660,28 +10678,30 @@ _Shariff.prototype = {
         var orientationClass = 'orientation-' + this.options.orientation;
 
         var $buttonList = $('<ul>').addClass(themeClass).addClass(orientationClass);
-
+		
         // add html for service-links
         this.services.forEach(function(service) {
-            var $li = $('<li class="shariff-button">').addClass(service.name);
-            var $shareText = '<span class="share_text">' + self.getLocalized(service, 'shareText');
+			if (!service.mobileonly || (typeof window.orientation !== 'undefined')) {
+	            var $li = $('<li class="shariff-button">').addClass(service.name);
+	            var $shareText = '<span class="share_text">' + self.getLocalized(service, 'shareText');
 
-            var $shareLink = $('<a>')
-              .attr('href', service.shareUrl)
-              .append($shareText);
+	            var $shareLink = $('<a>')
+	              .attr('href', service.shareUrl)
+	              .append($shareText);
 
-            if (service.popup) {
-                $shareLink.attr('rel', 'popup');
-			} else if (service.noblank) {
+	            if (service.popup) {
+	                $shareLink.attr('rel', 'popup');
+				} else if (service.noblank) {
 				
-            } else {
-                $shareLink.attr('target', '_blank');
-            }
-            $shareLink.attr('title', self.getLocalized(service, 'title'));
+	            } else {
+	                $shareLink.attr('target', '_blank');
+	            }
+	            $shareLink.attr('title', self.getLocalized(service, 'title'));
 
-            $li.append($shareLink);
+	            $li.append($shareLink);
 
-            $buttonList.append($li);
+	            $buttonList.append($li);
+			}
         });
 
         // event delegation
@@ -10738,4 +10758,4 @@ $('.shariff').each(function() {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./services/facebook":2,"./services/googleplus":3,"./services/info":4,"./services/linkedin":5,"./services/mail":6,"./services/pinterest":7,"./services/twitter":8,"./services/whatsapp":9,"./services/xing":10,"jquery":1}]},{},[11]);
+},{"./services/facebook":3,"./services/googleplus":4,"./services/info":5,"./services/linkedin":6,"./services/mail":7,"./services/pinterest":8,"./services/twitter":9,"./services/whatsapp":10,"./services/xing":11,"browserify-window":1,"jquery":2}]},{},[12]);

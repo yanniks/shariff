@@ -4,6 +4,7 @@ module.exports = function(shariff) {
     return {
         popup: true,
 		noblank: false,
+		mobileonly: false,
         shareText: 'tweet',
         name: 'twitter',
         title: {

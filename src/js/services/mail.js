@@ -4,6 +4,7 @@ module.exports = function(shariff) {
     return {
         popup: false,
 		noblank: false,
+		mobileonly: false,
         shareText: 'mail',
         name: 'mail',
         title: {

@@ -1,6 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
+var window = require('browserify-window');
 
 var _Shariff = function(element, options) {
     var self = this;
@@ -163,28 +164,30 @@ _Shariff.prototype = {
         var orientationClass = 'orientation-' + this.options.orientation;
 
         var $buttonList = $('<ul>').addClass(themeClass).addClass(orientationClass);
-
+		
         // add html for service-links
         this.services.forEach(function(service) {
-            var $li = $('<li class="shariff-button">').addClass(service.name);
-            var $shareText = '<span class="share_text">' + self.getLocalized(service, 'shareText');
+			if (!service.mobileonly || (typeof window.orientation !== 'undefined')) {
+	            var $li = $('<li class="shariff-button">').addClass(service.name);
+	            var $shareText = '<span class="share_text">' + self.getLocalized(service, 'shareText');
 
-            var $shareLink = $('<a>')
-              .attr('href', service.shareUrl)
-              .append($shareText);
+	            var $shareLink = $('<a>')
+	              .attr('href', service.shareUrl)
+	              .append($shareText);
 
-            if (service.popup) {
-                $shareLink.attr('rel', 'popup');
-			} else if (service.noblank) {
+	            if (service.popup) {
+	                $shareLink.attr('rel', 'popup');
+				} else if (service.noblank) {
 				
-            } else {
-                $shareLink.attr('target', '_blank');
-            }
-            $shareLink.attr('title', self.getLocalized(service, 'title'));
+	            } else {
+	                $shareLink.attr('target', '_blank');
+	            }
+	            $shareLink.attr('title', self.getLocalized(service, 'title'));
 
-            $li.append($shareLink);
+	            $li.append($shareLink);
 
-            $buttonList.append($li);
+	            $buttonList.append($li);
+			}
         });
 
         // event delegation

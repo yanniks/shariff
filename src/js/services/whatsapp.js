@@ -4,6 +4,7 @@ module.exports = function(shariff) {
     return {
         popup: false,
 		noblank: true,
+		mobileonly: true,
         shareText: 'WhatsApp',
         name: 'whatsapp',
         title: {
