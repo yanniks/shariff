@@ -7,12 +7,14 @@ module.exports = function(shariff) {
 		noblank: false,
         shareText: {
             'de': 'teilen',
-            'en': 'share'
+            'en': 'share',
+            'es': 'compartir'
         },
         name: 'facebook',
         title: {
             'de': 'Bei Facebook teilen',
-            'en': 'Share on Facebook'
+            'en': 'Share on Facebook',
+            'es': 'Compartir en Facebook'
         },
         shareUrl: 'https://www.facebook.com/sharer/sharer.php?u=' + fbEncUrl + shariff.getReferrerTrack()
     };

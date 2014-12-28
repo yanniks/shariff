@@ -8,7 +8,8 @@ module.exports = function(shariff) {
         name: 'mail',
         title: {
             'de': 'Per E-Mail versenden',
-            'en': 'Send by email'
+            'en': 'Send by email',
+            'es': 'Enviar por email'
         },
         shareUrl: 'mailto:?body=' + encodeURIComponent(shariff.getURL() + shariff.getReferrerTrack()) + '&subject=' + shariff.getShareText()
     };
