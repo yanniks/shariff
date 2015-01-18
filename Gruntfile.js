@@ -59,7 +59,7 @@ module.exports = function(grunt) {
                 },
                 src: 'src/js/shariff.js',
                 dest: 'demo/app.min.js'
-            },
+            }
         },
 
         copy: {
@@ -67,18 +67,14 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        flatten: true,
-                        src: ['node_modules/font-awesome/fonts/fontawesome*'],
-                        dest: 'demo/',
-                        filter: 'isFile'
+                        cwd: 'node_modules/font-awesome',
+                        src: '{fonts,css}/*',
+                        dest: 'demo/'
                     },
                     {
-                        expand: true,
-                        flatten: true,
-                        src: ['src/img/*'],
-                        dest: 'demo/',
-                        filter: 'isFile'
-                    },
+                        src: 'build/*',
+                        dest: 'demo/'
+                    }
                 ]
             }
         },
@@ -112,6 +108,13 @@ module.exports = function(grunt) {
                     compress: true,
                 },
                 src: 'src/style/shariff.less',
+                dest: 'build/shariff.complete.css'
+            },
+            dist_min: {
+                options: {
+                    compress: true,
+                },
+                src: 'src/style/shariff-layout.less',
                 dest: 'build/shariff.min.css'
             }
         },
@@ -134,7 +137,7 @@ module.exports = function(grunt) {
                     base: 'demo',
                     keepalive: true,
                     // livereload: true,
-                    open: true,
+                    // open: true,
                     // debug: true,
                     middleware: function (connect, options, middlewares) {
                         var proxy = require('grunt-connect-proxy/lib/utils').proxyRequest;
