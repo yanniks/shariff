@@ -75,6 +75,23 @@
                 background-color: #4fa5a7;
             }
         }
+        &.reddit {
+            a {
+                padding-left: 24px;
+                background-color: #cee3f8;
+                &:hover {
+                    background-color: #bedcf9;
+                }
+                &::before {
+                    content:"\f1a1";
+                    font-size: 17px;
+                }
+            }
+            .share_count {
+                color: #d9eafb;
+                background-color: #e9f2fa;
+            }
+        }
         &.linkedin {
             a {
                 padding-left: 24px;
@@ -199,7 +216,7 @@
     }
     // ------------------------- colourless design
     .theme-grey {
-        .twitter, .facebook, .googleplus, .mail, .whatsapp, .linkedin, .pinterest, .xing {
+        .twitter, .facebook, .googleplus, .mail, .whatsapp, .linkedin, .pinterest, .xing, .reddit {
             a {
                 background-color: #b0b0b0;
             }
@@ -216,6 +233,9 @@
         }
         .xing a:hover {
             background-color: #4fa5a7;
+        }
+        .reddit a:hover {
+            background-color: #cee3f8;
         }
         .linkedin a:hover {
             background-color: #007bb6;
@@ -259,6 +279,9 @@
         }
         .xing a {
             color: #126567;
+        }
+        .reddit a {
+            color: #cee3f8;
         }
         .googleplus a {
             color: #d34836;
