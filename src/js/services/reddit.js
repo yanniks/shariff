@@ -11,7 +11,7 @@ module.exports = function(shariff) {
             'en': 'share',
 			'es': 'compartir'
         },
-        name: 'xing',
+        name: 'reddit',
         title: {
             'de': 'Bei Reddit teilen',
             'en': 'Share on Reddit',
