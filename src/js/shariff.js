@@ -22,7 +22,8 @@ var _Shariff = function(element, options) {
         require('./services/linkedin'),
 		require('./services/xing'),
         require('./services/pinterest'),
-		require('./services/reddit')
+		require('./services/reddit'),
+		require('./services/stumbleupon')
     ];
 
     // filter available services to those that are enabled and initialize them
