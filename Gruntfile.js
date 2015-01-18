@@ -41,13 +41,19 @@ module.exports = function(grunt) {
                 src: 'src/js/shariff.js',
                 dest: 'demo/app.min.js'
             },
-            dist: {
+            dist_complete_min: {
+                options: {
+                    transform: [ ['uglifyify', { global: true } ] ]
+                },
                 src: 'src/js/shariff.js',
-                dest: 'build/shariff.js'
+                dest: 'build/shariff.complete.js'
             },
             dist_min: {
                 options: {
-                    transform: [ ['uglifyify', { global: true } ] ]
+                    transform: [
+                        ['uglifyify', { global: true } ],
+                        ['browserify-shim', { global: true } ]
+                    ]
                 },
                 src: 'src/js/shariff.js',
                 dest: 'build/shariff.min.js'
@@ -55,7 +61,7 @@ module.exports = function(grunt) {
             demo: {
                 options: {
                     transform: [ ['uglifyify', { global: true } ] ],
-                    watch: true,
+                    watch: true
                 },
                 src: 'src/js/shariff.js',
                 dest: 'demo/app.min.js'
@@ -153,7 +159,7 @@ module.exports = function(grunt) {
                         rewrite: {
                             '^/shariff': ''
                         },
-                        context: '/shariff',
+                        context: '/shariff/',
                         host: 'localhost',
                         port: 3001,
                         https: false,
@@ -185,7 +191,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-hapi');
 
     grunt.registerTask('test', ['jshint']);
-    grunt.registerTask('build', ['test', 'less:demo', 'less:dist', 'browserify:dist', 'browserify:dist_min']);
+    grunt.registerTask('build', ['test', 'less:demo', 'less:dist', 'browserify:dist_complete_min', 'browserify:dist_min']);
     grunt.registerTask('demo', ['copy:demo', 'less:demo', 'browserify:demo', 'hapi', 'configureProxies:demo', 'connect']);
     grunt.registerTask('default', ['test', 'browserify:dev']);
 };

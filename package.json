@@ -33,6 +33,9 @@
       "email": "dzs@heise.de"
     }
   ],
+  "browserify-shim": {
+    "jquery": "global:$"
+  },
   "dependencies": {
     "font-awesome": "^4.2.0",
     "jquery": "^1.11.2"
