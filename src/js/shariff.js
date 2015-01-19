@@ -233,6 +233,9 @@ _Shariff.prototype = {
         } else {
             title = $('title').text();
         }
+		if (this.options.ttl.length > 0) {
+			title = this.options.ttl;
+		}
         // 120 is the max character count left after twitters automatic url shortening with t.co
         return encodeURIComponent(this.abbreviateText(title, 120));
     }
