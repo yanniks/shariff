@@ -10,6 +10,7 @@ module.exports = function(shariff) {
         title: {
             'de': 'weitere Informationen',
             'en': 'more information',
+            'fr': 'Plus d’informations',
             'es': 'Más informaciones'
         },
         shareUrl: shariff.getInfoUrl()

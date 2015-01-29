@@ -9,12 +9,14 @@ module.exports = function(shariff) {
         shareText: {
             'de': 'teilen',
             'en': 'share',
+            'fr': 'partager',
 			'es': 'compartir'
         },
         name: 'stumbleupon',
         title: {
             'de': 'Bei StumbleUpon teilen',
             'en': 'Share on StumbleUpon',
+            'fr': 'Partager sur StumbleUpon',
 			'es': 'Compartir en StumbleUpon'
         },
 		shareUrl: '//www.stumbleupon.com/submit?url=' + EncUrl + shariff.getReferrerTrack()
