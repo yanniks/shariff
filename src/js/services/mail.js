@@ -10,6 +10,7 @@ module.exports = function(shariff) {
         title: {
             'de': 'Per E-Mail versenden',
             'en': 'Send by email',
+            'fr': 'Envoyer par e-mail',
             'es': 'Enviar por email'
         },
         shareUrl: 'mailto:?body=' + encodeURIComponent(shariff.getURL() + shariff.getReferrerTrack()) + '&subject=' + shariff.getShareText()
