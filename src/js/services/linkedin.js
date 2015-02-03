@@ -13,6 +13,7 @@ module.exports = function(shariff) {
 			'es': 'compartir'
         },
         name: 'linkedin',
+		faName: 'fa-linkedin',
         title: {
             'de': 'Bei LinkedIn teilen',
             'en': 'Share on LinkedIn',

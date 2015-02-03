@@ -1,11 +1,19 @@
 'use strict';
 
+var browsers = [
+    'last 2 versions',
+    'ie 9',
+    'ie 10',
+    'Firefox ESR',
+    'Opera 12.1'
+];
+
 module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
         meta: {
-            banner: '\n/*\n * <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+            banner: '\n/*!\n * <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
                 '<%= grunt.template.today("dd.mm.yyyy") %>\n' +
                 ' * <%= pkg.homepage %>\n' +
                 ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>, <%= _.pluck(pkg.contributors, "name").join(", ") %>\n' +
@@ -97,30 +105,39 @@ module.exports = function(grunt) {
 
         less: {
             options: {
-                strictMath: true,
-                compress: true,
-                report: 'min'
+                banner: '<%= meta.banner %>',
+                paths: [
+                    'node_modules/font-awesome/less',
+                    'node_modules/shariff/src/style'
+                ],
+                plugins: [
+                    new (require('less-plugin-autoprefix'))({browsers: browsers}),
+                    new (require('less-plugin-clean-css'))({keepSpecialComments: 1})
+                ],
+                strictMath: true
             },
             demo: {
                 options: {
                     sourceMap: true,
-                    outputSourceFiles: true
+                    outputSourceFiles: true,
+                    sourceMapFileInline: true,
+                    plugins: [
+                        new (require('less-plugin-autoprefix'))({
+                            browsers: browsers,
+                            map: true
+                        }),
+                        new (require('less-plugin-clean-css'))()
+                    ],
                 },
-                src: ['src/style/shariff.less', 'src/style/demo.less'],
+                src: 'src/style/demo.less',
                 dest: 'demo/app.min.css'
             },
             dist: {
-                options: {
-                    compress: true,
-                },
-                src: 'src/style/shariff.less',
+                src: 'src/style/shariff-complete.less',
                 dest: 'build/shariff.complete.css'
             },
             dist_min: {
-                options: {
-                    compress: true,
-                },
-                src: 'src/style/shariff-layout.less',
+                src: 'src/style/shariff.less',
                 dest: 'build/shariff.min.css'
             }
         },

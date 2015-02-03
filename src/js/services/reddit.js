@@ -13,6 +13,7 @@ module.exports = function(shariff) {
 			'es': 'compartir'
         },
         name: 'reddit',
+		faName: 'fa-reddit',
         title: {
             'de': 'Bei Reddit teilen',
             'en': 'Share on Reddit',

@@ -73,6 +73,8 @@ _Shariff.prototype = {
         // services to be enabled in the following order
         services   : ['twitter', 'facebook', 'googleplus', 'info'],
 
+        twitterVia: null,
+
         // build URI from rel="canonical" or document.location
         url: function() {
             var url = global.document.location.href;
@@ -170,25 +172,27 @@ _Shariff.prototype = {
         // add html for service-links
         this.services.forEach(function(service) {
 			if (!service.mobileonly || (typeof window.orientation !== 'undefined')) {
-	            var $li = $('<li class="shariff-button">').addClass(service.name);
-	            var $shareText = '<span class="share_text">' + self.getLocalized(service, 'shareText');
+          	  	var $li = $('<li class="shariff-button">').addClass(service.name);
+         		var $shareText = '<span class="share_text">' + self.getLocalized(service, 'shareText');
 
-	            var $shareLink = $('<a>')
-	              .attr('href', service.shareUrl)
-	              .append($shareText);
+          	  	var $shareLink = $('<a>')
+          			.attr('href', service.shareUrl)
+ 					.append($shareText);
 
-	            if (service.popup) {
-	                $shareLink.attr('rel', 'popup');
-				} else if (service.noblank) {
-				
-	            } else {
-	                $shareLink.attr('target', '_blank');
-	            }
-	            $shareLink.attr('title', self.getLocalized(service, 'title'));
+         		if (typeof service.faName !== 'undefined') {
+         		   $shareLink.prepend('<span class="fa ' +  service.faName + '">');
+            	}
 
-	            $li.append($shareLink);
+				if (service.popup) {
+                	$shareLink.attr('rel', 'popup');
+				} else {
+                	$shareLink.attr('target', '_blank');
+            	}
+				$shareLink.attr('title', self.getLocalized(service, 'title'));
 
-	            $buttonList.append($li);
+				$li.append($shareLink);
+
+				$buttonList.append($li);
 			}
         });
 
@@ -211,7 +215,7 @@ _Shariff.prototype = {
 
     // abbreviate at last blank before length and add "\u2026" (horizontal ellipsis)
     abbreviateText: function(text, length) {
-        var abbreviated = decodeURIComponent(text);
+        var abbreviated = $('<div/>').html(text).text();
         if (abbreviated.length <= length) {
             return text;
         }
@@ -245,5 +249,7 @@ module.exports = _Shariff;
 
 // initialize .shariff elements
 $('.shariff').each(function() {
-    this.shariff = new _Shariff(this);
+    if (!this.hasOwnProperty('shariff')) {
+        this.shariff = new _Shariff(this);
+    }
 });

@@ -1,6 +1,6 @@
 # Shariff – Give Social Media Buttons Some Privacy
 
-Shariff enables website users to share their favorite content without compromising their privacy.
+Shariff enables website users to share their favorite content without compromising their privacy. [Demo](http://heiseonline.github.io/shariff/)
 
 ![Shariff Logo © 2014 Heise Zeitschriften Verlag](http://www.heise.de/icons/ho/shariff-logo.png)
 
@@ -92,6 +92,7 @@ Make sure you have installed the [Grunt CLI](http://gruntjs.com/getting-started#
 | `data-referrer-track` | A string that will be appended to the share url. Can be disabled using `null`. | `null` |
 | `data-services`   | An entity-encoded JSON string containing an array of service names to be enabled. Example: `data-services="[&quot;facebook&quot;,&quot;googleplus&quot;]"` Available service names: `twitter`, `facebook`, `googleplus`, `mail`, `info` | (all enabled) |
 | `data-theme`       | We include two color schemes, `standard` or `grey`. | `standard` |
+| `data-twitter-via` | Screen name of the user to attribute the Tweet to | `null` |
 | `data-url`         | The canonical URL of the page to check. | page's canonical URL or `og:url` or current URL |
 
 ## Backends

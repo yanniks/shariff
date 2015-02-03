@@ -13,6 +13,7 @@ module.exports = function(shariff) {
 			'es': 'compartir'
         },
         name: 'stumbleupon',
+		faName: 'fa-stumbleupon',
         title: {
             'de': 'Bei StumbleUpon teilen',
             'en': 'Share on StumbleUpon',
