@@ -1878,6 +1878,18 @@
   width: 30px;
   border-radius: 50%;
 }
+.shariff .theme-round .shariff-button .share_count {
+  padding: 0 0px;
+  height: 30px;
+  width: 30px;
+  top: 0px;
+  left: 0px;
+  text-align: center;
+  visibility: hidden;
+}
+.shariff .theme-round .shariff-button:hover .share_count {
+  visibility: visible;
+}
 .shariff .theme-round .share_text {
   display: block;
   text-indent: -9999px;
@@ -1906,6 +1918,9 @@
   color: #0174a4;
   background-color: #96D4EE;
 }
+.shariff .twitter-round .fa-twitter {
+  margin-left: -1px;
+}
 .shariff .theme-white .twitter a {
   color: #55acee;
 }
@@ -1927,6 +1942,9 @@
 .shariff .theme-white .facebook a {
   color: #3b5998;
 }
+.shariff .theme-round .fa-facebook {
+  margin-left: 4px;
+}
 .shariff .orientation-vertical .facebook a {
   padding-left: 34px;
 }
@@ -1944,6 +1962,10 @@
   color: #a31601;
   background-color: #eda79d;
 }
+.shariff .theme-round .fa-google-plus {
+  margin-left: 3px;
+  margin-top: -1px;
+}
 .shariff .theme-white .googleplus a {
   color: #d34836;
 }
@@ -1955,6 +1977,9 @@
 }
 .shariff .mail .fa-envelope {
   font-size: 18px;
+}
+.shariff .theme-round .fa-envelope {
+  margin-left: 0.5px;
 }
 .shariff .theme-white .mail a {
   color: #999;
@@ -1989,6 +2014,9 @@
 .shariff .theme-white .info {
   height: 30px;
 }
+.shariff .theme-round .fa-info {
+  margin-left: 3px;
+}
 .shariff .orientation-vertical .info {
   margin-left: 95px;
 }
@@ -2000,6 +2028,9 @@
 }
 .shariff .whatsapp .fa-whatsapp {
   font-size: 22px;
+}
+.shariff .theme-round .fa-whatsapp {
+  margin-left: 1px;
 }
 .shariff .theme-white .whatsapp a {
   color: #5cbe4a;
@@ -2015,6 +2046,10 @@
   color: #183a75;
   background-color: #99adcf;
 }
+.shariff .theme-round .fa-linkedin {
+  margin-left: 3px;
+  margin-top: -0.5px;
+}
 .shariff .theme-white .linkedin a {
   color: #007bb6;
 }
@@ -2028,6 +2063,9 @@
 .shariff .pinterest .share_count {
   color: #ffffff;
   background-color: #ff050f;
+}
+.shariff .theme-round .fa-pinterest {
+  margin-left: 3px;
 }
 .shariff .theme-white .pinterest a {
   color: #9a2718;
@@ -2047,6 +2085,9 @@
   color: #000000;
   background-color: #e9f2fa;
 }
+.shariff .theme-round .fa-reddit {
+  margin-left: 2px;
+}
 .shariff .theme-white .reddit a {
   color: #cee3f8;
 }
@@ -2061,6 +2102,9 @@
   color: #15686a;
   background-color: #fb613c;
 }
+.shariff .theme-round .fa-stumbleupon {
+  margin-left: 1px;
+}
 .shariff .theme-white .stumbleupon a {
   color: #fb613c;
 }
@@ -2074,6 +2118,10 @@
 .shariff .xing .share_count {
   color: #15686a;
   background-color: #4fa5a7;
+}
+.shariff .theme-round .fa-xing {
+  margin-left: 4px;
+  margin-top: 1px;
 }
 .shariff .theme-white .xing a {
   color: #126567;

@@ -80,8 +80,20 @@
     // runde button
     .theme-round {
         .shariff-button {
-                width: 30px;
-                border-radius: 50%;
+			width: 30px;
+			border-radius: 50%;
+			.share_count {
+				padding: 0 0px;
+	            height: 30px;
+				width: 30px;
+	            top: 0px;
+	            left: 0px;
+				text-align: center;
+				visibility: hidden;
+			}
+			&:hover .share_count {
+				visibility: visible;
+			}
         }
         .share_text {
                 display: block;
