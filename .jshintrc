@@ -83,7 +83,7 @@
     // Whether unescaped first/last dash (-) inside brackets in regexps should be allowed.
     "regexdash": false,
     // Whether script-targeted URLs should be allowed.
-    "scripturl": false,
+    "scripturl": true,
     // Whether variable shadowing should be allowed.
     "shadow": false,
     // Whether `new function () { ... };` and `new Object;` should be allowed.

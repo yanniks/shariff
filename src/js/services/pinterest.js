@@ -2,6 +2,7 @@
 
 module.exports = function(shariff) {
     var EncUrl = encodeURIComponent(shariff.getURL());
+    var EncImg = encodeURIComponent(shariff.getImageUrl());
     return {
         popup: true,
 		noblank: false,
@@ -19,6 +20,6 @@ module.exports = function(shariff) {
             'fr': 'Partager sur Pinterest',
 			'es': 'Compartir en Pinterest'
         },
-		shareUrl: '//www.pinterest.com/pin/create/button/?url=' + EncUrl + shariff.getReferrerTrack() + '&media=' + shariff.getImageUrl() + '&description=' + shariff.getShareText()
+		shareUrl: '//www.pinterest.com/pin/create/button/?url=' + EncUrl + shariff.getReferrerTrack() + '&media=' + EncImg + '&description=' + shariff.getShareText()
     };
 };

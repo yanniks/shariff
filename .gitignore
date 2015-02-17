@@ -37,3 +37,9 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
+
+# eigene
+Gruntfile.js
+*~
+build/**
+*shariff.WP.less

@@ -23,7 +23,8 @@ var _Shariff = function(element, options) {
 		require('./services/xing'),
         require('./services/pinterest'),
 		require('./services/reddit'),
-		require('./services/stumbleupon')
+		require('./services/stumbleupon'),
+	require('./services/printer')
     ];
 
     // filter available services to those that are enabled and initialize them
@@ -112,9 +113,16 @@ _Shariff.prototype = {
         return this.options.infoUrl;
     },
 	
-	getImageUrl: function() {
-		return this.options.image;
-	},
+    getImageUrl: function() {
+        // look if media is set
+        if (this.options.media === undefined ) {
+            // look if image is also not set
+            if (this.options.image === undefined ) {
+                // return the URL for Pinterest
+                return encodeURIComponent(this.getURL());
+            }else{return this.options.image; }
+        } else { return this.options.media; }
+    },
 
     getURL: function() {
         var url = this.options.url;
@@ -233,9 +241,9 @@ _Shariff.prototype = {
         } else {
             title = $('title').text();
         }
-		if (this.options.ttl.length > 0) {
-			title = this.options.ttl;
-		}
+//		if (this.options.ttl.length > 0) {
+//			title = this.options.ttl;
+//		}
         // 120 is the max character count left after twitters automatic url shortening with t.co
         return encodeURIComponent(this.abbreviateText(title, 120));
     }

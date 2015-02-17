@@ -201,6 +201,18 @@
                 }
             }
         }
+        &.printer {
+            a {
+                background-color: #999;
+                &:hover {
+                    background-color: #a8a8a8;
+                }
+                &::before {
+                    content:"\f02f";
+                    font-size: 18px;
+                }
+            }
+        }
         &.info {
             width: 23px;
             height: 28px;
@@ -233,7 +245,7 @@
     }
     // ------------------------- colourless design
     .theme-grey {
-        .twitter, .facebook, .googleplus, .mail, .whatsapp, .linkedin, .pinterest, .xing, .reddit {
+        .twitter, .facebook, .googleplus, .mail, .printer .whatsapp, .linkedin, .pinterest, .xing, .reddit {
             a {
                 background-color: #b0b0b0;
             }
@@ -310,6 +322,9 @@
 			color: #508144;
 		}
         .mail a {
+            color: #999;
+        }
+	.printer a {
             color: #999;
         }
         .info {
