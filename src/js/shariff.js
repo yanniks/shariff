@@ -176,8 +176,9 @@ _Shariff.prototype = {
         var $buttonList = $('<ul>').addClass(themeClass).addClass(orientationClass);
 		
         // add html for service-links
+        // mobil Mozilla knows window.document.ontouchstart as object
         this.services.forEach(function(service) {
-			if (!service.mobileonly || (typeof window.orientation !== 'undefined')) {
+			if (!service.mobileonly || (typeof window.orientation !== 'undefined') || (typeof(window.document.ontouchstart) === 'object')) {
 	            var $li = $('<li class="shariff-button">').addClass(service.name);
 	            var $shareText = '<span class="share_text">' + self.getLocalized(service, 'shareText');
 

@@ -3,7 +3,7 @@
 module.exports = function(shariff) {
     return {
         popup: false,
-		noblank: false,
+		noblank: true,
 		mobileonly: false,
         shareText: 'printer',
         name: 'printer',
