@@ -43,3 +43,7 @@ Gruntfile.js
 *~
 build/**
 *shariff.WP.less
+.DS_Store
+shariff-wp/
+shariff-svn/
+*.zip
