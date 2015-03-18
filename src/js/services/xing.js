@@ -13,6 +13,7 @@ module.exports = function(shariff) {
 			'es': 'compartir'
         },
         name: 'xing',
+		faName: 'fa-xing',
         title: {
             'de': 'Bei XING teilen',
             'en': 'Share on XING',

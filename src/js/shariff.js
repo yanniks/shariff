@@ -24,7 +24,7 @@ var _Shariff = function(element, options) {
         require('./services/pinterest'),
 		require('./services/reddit'),
 		require('./services/stumbleupon'),
-	require('./services/printer')
+        require('./services/printer')
     ];
 
     // filter available services to those that are enabled and initialize them
@@ -74,6 +74,8 @@ _Shariff.prototype = {
         // services to be enabled in the following order
         services   : ['twitter', 'facebook', 'googleplus', 'info'],
 
+        twitterVia: null,
+
         // build URI from rel="canonical" or document.location
         url: function() {
             var url = global.document.location.href;
@@ -113,16 +115,9 @@ _Shariff.prototype = {
         return this.options.infoUrl;
     },
 	
-    getImageUrl: function() {
-        // look if media is set
-        if (this.options.media === undefined ) {
-            // look if image is also not set
-            if (this.options.image === undefined ) {
-                // return the URL for Pinterest
-                return encodeURIComponent(this.getURL());
-            }else{return this.options.image; }
-        } else { return this.options.media; }
-    },
+	getImageUrl: function() {
+		return this.options.image;
+	},
 
     getURL: function() {
         var url = this.options.url;
@@ -176,28 +171,29 @@ _Shariff.prototype = {
         var $buttonList = $('<ul>').addClass(themeClass).addClass(orientationClass);
 		
         // add html for service-links
-        // mobil Mozilla knows window.document.ontouchstart as object
         this.services.forEach(function(service) {
-			if (!service.mobileonly || (typeof window.orientation !== 'undefined') || (typeof(window.document.ontouchstart) === 'object')) {
-	            var $li = $('<li class="shariff-button">').addClass(service.name);
-	            var $shareText = '<span class="share_text">' + self.getLocalized(service, 'shareText');
+			if (!service.mobileonly || (typeof window.orientation !== 'undefined')) {
+          	  	var $li = $('<li class="shariff-button">').addClass(service.name);
+         		var $shareText = '<span class="share_text">' + self.getLocalized(service, 'shareText');
 
-	            var $shareLink = $('<a>')
-	              .attr('href', service.shareUrl)
-	              .append($shareText);
+          	  	var $shareLink = $('<a>')
+          			.attr('href', service.shareUrl)
+ 					.append($shareText);
 
-	            if (service.popup) {
-	                $shareLink.attr('rel', 'popup');
-				} else if (service.noblank) {
-				
-	            } else {
-	                $shareLink.attr('target', '_blank');
-	            }
-	            $shareLink.attr('title', self.getLocalized(service, 'title'));
+         		if (typeof service.faName !== 'undefined') {
+         		   $shareLink.prepend('<span class="fa ' +  service.faName + '">');
+            	}
 
-	            $li.append($shareLink);
+				if (service.popup) {
+                	$shareLink.attr('rel', 'popup');
+				} else {
+                	$shareLink.attr('target', '_blank');
+            	}
+				$shareLink.attr('title', self.getLocalized(service, 'title'));
 
-	            $buttonList.append($li);
+                                $li.append($shareLink);
+
+                                $buttonList.append($li);
 			}
         });
 
@@ -242,8 +238,8 @@ _Shariff.prototype = {
         } else {
             title = $('title').text();
         }
-//		if (this.options.ttl.length > 0) {
-//			title = this.options.ttl;
+//		if (this.options.title.length > 0) {
+//			title = this.options.title;
 //		}
         // 120 is the max character count left after twitters automatic url shortening with t.co
         return encodeURIComponent(this.abbreviateText(title, 120));
@@ -254,5 +250,7 @@ module.exports = _Shariff;
 
 // initialize .shariff elements
 $('.shariff').each(function() {
-    this.shariff = new _Shariff(this);
+    if (!this.hasOwnProperty('shariff')) {
+        this.shariff = new _Shariff(this);
+    }
 });

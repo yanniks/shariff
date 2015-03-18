@@ -7,6 +7,7 @@ module.exports = function(shariff) {
 		mobileonly: false,
         shareText: 'printer',
         name: 'printer',
+        faName: 'fa-print',
         title: {
             'de': 'Drucken',
             'en': 'Printer',
