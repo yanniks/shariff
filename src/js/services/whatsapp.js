@@ -7,6 +7,7 @@ module.exports = function(shariff) {
 		mobileonly: true,
         shareText: 'WhatsApp',
         name: 'whatsapp',
+        faName: 'fa-whatsapp',
         title: {
             'de': 'Bei Whatsapp teilen',
             'en': 'Share on Whatsapp',

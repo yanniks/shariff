@@ -18,12 +18,13 @@ var _Shariff = function(element, options) {
         require('./services/twitter'),
         require('./services/whatsapp'),
         require('./services/mail'),
+        require('./services/mailto'),
         require('./services/info'),
         require('./services/linkedin'),
-		require('./services/xing'),
+	require('./services/xing'),
         require('./services/pinterest'),
-		require('./services/reddit'),
-		require('./services/stumbleupon'),
+	require('./services/reddit'),
+	require('./services/stumbleupon'),
         require('./services/printer')
     ];
 
@@ -116,7 +117,14 @@ _Shariff.prototype = {
     },
 	
 	getImageUrl: function() {
-		return this.options.image;
+            // look if media is set
+            if (this.options.media === undefined ) {
+            // look if image is also not set
+            if (this.options.image === undefined ) {
+            // return the URL for Pinterest
+            return encodeURIComponent(this.getURL());
+            }else{return this.options.image; }
+          } else { return this.options.media; }
 	},
 
     getURL: function() {
@@ -172,7 +180,7 @@ _Shariff.prototype = {
 		
         // add html for service-links
         this.services.forEach(function(service) {
-			if (!service.mobileonly || (typeof window.orientation !== 'undefined')) {
+			if (!service.mobileonly || (typeof window.orientation !== 'undefined') || (typeof(window.document.ontouchstart) === 'object')) {
           	  	var $li = $('<li class="shariff-button">').addClass(service.name);
          		var $shareText = '<span class="share_text">' + self.getLocalized(service, 'shareText');
 
@@ -238,9 +246,9 @@ _Shariff.prototype = {
         } else {
             title = $('title').text();
         }
-//		if (this.options.title.length > 0) {
-//			title = this.options.title;
-//		}
+	if (this.options.title.length > 0) {
+		title = this.options.title;
+	}
         // 120 is the max character count left after twitters automatic url shortening with t.co
         return encodeURIComponent(this.abbreviateText(title, 120));
     }

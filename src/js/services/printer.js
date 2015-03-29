@@ -5,7 +5,12 @@ module.exports = function(shariff) {
         popup: false,
 		noblank: true,
 		mobileonly: false,
-        shareText: 'printer',
+        shareText: {
+            'de': 'drucken',
+            'en': 'print',
+            'fr': 'imprimer',
+            'es': 'imprimir'
+        },
         name: 'printer',
         faName: 'fa-print',
         title: {

@@ -3,8 +3,8 @@
 module.exports = function(shariff) {
     return {
         popup: false,
-		noblank: false,
-		mobileonly: false,
+	noblank: false,
+	mobileonly: false,
         shareText: 'Info',
         name: 'info',
         faName: 'fa-info',

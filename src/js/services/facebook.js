@@ -4,8 +4,8 @@ module.exports = function(shariff) {
     var url = encodeURIComponent(shariff.getURL());
     return {
         popup: true,
-		noblank: false,
-		mobileonly: false,
+	noblank: false,
+	mobileonly: false,
         shareText: {
             'de': 'teilen',
             'fr': 'partager',
