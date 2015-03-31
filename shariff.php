@@ -435,7 +435,6 @@ function RenderShariff( $atts , $content = null) {
   // if we have a style attribute
   if(array_key_exists('style', $atts))$output.='<div class="ShariffSC" style="'. esc_html($atts['style']) .'">';
   $output.='<div class=\'shariff\'';
-  $output.=' data-title=\''.get_the_title().'\'';
 
   // set a url attribute. Usefull e.g. in widgets that should point to the domain instead of page
   if(array_key_exists('url', $atts)) $output.=' data-url=\''.esc_url($atts['url']).'\'';
@@ -447,7 +446,6 @@ function RenderShariff( $atts , $content = null) {
       
   // set options
   if(array_key_exists('info_url', $atts))    $output.=" data-info-url='".	esc_html($atts['info_url'])."'";
-  if(array_key_exists('twitter_via', $atts)) $output.=" data-twitter-via='".	esc_html($atts['twitter_via'])."'";
   if(array_key_exists('orientation', $atts)) $output.=" data-orientation='".	esc_html($atts['orientation'])."'";
   if(array_key_exists('theme', $atts))       $output.=" data-theme='".		esc_html($atts['theme'])."'";
   // rtzTodo: use geoip if possible
@@ -551,6 +549,7 @@ class ShariffWidget extends WP_Widget {
     $wp_title = wp_title( '', false);
     if(!empty($wp_title)) $page_title = ltrim($wp_title); // wp_title for all pages that have it
     else $page_title = get_bloginfo('name'); // the site name for static start pages where wp_title is not set
+    $shorttag=substr($shorttag,0,-1)." title='".$page_title."' url='".$page_url."']"; // add url and title to the shorttag
     // process the shortcode
     echo do_shortcode($shorttag);
     // close Container
