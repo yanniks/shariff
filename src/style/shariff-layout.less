@@ -8,7 +8,6 @@
         }
     }
 }
-
 .shariff {
     &::after,
     &::before {
@@ -24,12 +23,14 @@
         margin: 0;
         list-style: none;
     }
+    ul { li::before { content: normal !important; } }
     li {
-	padding: 0 !important;
         height: 35px;
         box-sizing: border-box;
         overflow: hidden;
         margin: 0 25px 10px 0; 
+        padding: 0 !important;
+        text-indent: 0 !important;
         a {
             color: #fff;
             position: relative;
@@ -140,16 +141,16 @@
                 display: block;
                 text-indent: -9999px;
         }
+        li { 
+            background: none;
+            .fa { vertical-align: baseline; }
+        }
         a { 
             text-align: center;
             color: #fff;
             position: relative;
             height: 35px;
         }
-	li {
-	   background: none;
-	   .fa { vertical-align: baseline; }
-	}
         li.facebook .share_count:hover {
                 background-color: #99adcf !important;
                 color: #183a75 !important;
