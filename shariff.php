@@ -384,14 +384,14 @@ function shariffPosts($content) {
   }elseif( is_singular( 'post' ) ){
     // ab version 1.7. Die zweite Bedingung kann eigentlich raus. Vorsichtshalber in der Version
     // mal trotzdem pruefen, damit wir bei nem Update-Problem nicht doppelt anzeigen.
-    if(isset($shariff3UU["add_before_all_posts"]) && isset($shariff3UU["add_before_all"])) 	if($shariff3UU["add_before_all_posts"]=='1' && $shariff3UU["add_before_all"]!='1') $content=buildShariffShorttag().$content;
-    if(isset($shariff3UU["add_after_all_posts"]) && isset($shariff3UU["add_all"]))		if($shariff3UU["add_after_all_posts"]=='1' && $shariff3UU["add_all"]!='1') $content.=buildShariffShorttag();
+    if(isset($shariff3UU["add_before_all_posts"]) && $shariff3UU["add_before_all_posts"]=='1' && ((isset($shariff3UU["add_before_all"]) && $shariff3UU["add_before_all"]!='1') || (!isset($shariff3UU["add_before_all"])))) $content=buildShariffShorttag().$content;
+    if(isset($shariff3UU["add_after_all_posts"]) && $shariff3UU["add_after_all_posts"]=='1' && ((isset($shariff3UU["add_all"]) && $shariff3UU["add_all"]!='1') || (!isset($shariff3UU["add_all"])))) $content.=buildShariffShorttag();
   } elseif ( is_singular( 'page' ) ) {
     // ab version 1.7. Die zweite Bedingung kann eigentlich raus. Vorsichtshalber in der Version
     // mal trotzdem pruefen, damit wir bei nem Update-Problem nicht doppelt anzeigen. Fliegt dann
     // zusammen mit dem else-Zweig bei der naechsten Version raus.
-    if(isset($shariff3UU["add_before_all_pages"]) && isset($shariff3UU["add_before_all"]))	if($shariff3UU["add_before_all_pages"]=='1' && $shariff3UU["add_before_all"]!='1') $content=buildShariffShorttag().$content;
-    if(isset($shariff3UU["add_after_all_pages"]) && isset($shariff3UU["add__all"]))		if($shariff3UU["add_after_all_pages"]=='1' && $shariff3UU["add__all"]!='1') $content.=buildShariffShorttag();
+    if(isset($shariff3UU["add_before_all_pages"]) && $shariff3UU["add_before_all_pages"]=='1' && ((isset($shariff3UU["add_before_all"]) && $shariff3UU["add_before_all"]!='1') || (!isset($shariff3UU["add_before_all"])))) $content=buildShariffShorttag().$content;
+    if(isset($shariff3UU["add_after_all_pages"]) && $shariff3UU["add_after_all_pages"]=='1' && ((isset($shariff3UU["add_all"]) && $shariff3UU["add_all"]!='1') || (!isset($shariff3UU["add_all"])))) $content.=buildShariffShorttag();
   }else{
     // auf allen Einzelseiten
     // vor version 1.7
