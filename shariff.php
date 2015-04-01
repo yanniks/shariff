@@ -570,15 +570,12 @@ register_deactivation_hook( __FILE__, 'shariff3UU_deactivate' );
 
 /* Display an update notice that can be dismissed */
 function shariff3UU_admin_notice() {
-  global $current_user ;
-  /* Check that the user hasn't already clicked to ignore the message and can access options */
-  if ( !get_user_meta($current_user->ID, 'shariff3UU_ignore_notice') && current_user_can( 'manage_options' ) ) {
-    echo '<div class="updated"><p>';
-    printf(__('<span>' . __('Please check your ', 'shariff3UU') . '<a href="' .
-    get_bloginfo('wpurl') . '/wp-admin/options-general.php?page=shariff3uu">' .
-    __('Shariff-Settings</a> - We have new detailed options where shariff buttons can be displayed! Also please read the FAQ about planed changes of the mail/mailto service functionality.', 'shariff3UU') .
-    '</span><span style="float:right; margin-top: -8px; font-size:1.8em; font-weight:bold;"><a href="%1$s" style="color#000">&times;</a></span>'), '?shariff3UU_nag_ignore=0');
-    echo '</p></div>';
+  global $current_user;
+  $user_id = $current_user->ID;
+  // Check that the user hasn't already clicked to ignore the message and can access options
+  if ( !get_user_meta($user_id, 'shariff3UU_ignore_notice') && current_user_can( 'manage_options' ) ) {
+    $link = add_query_arg( 'shariff3UU_nag_ignore', '0', esc_url_raw($_SERVER['REQUEST_URI']));
+    echo "<div class='updated'><a href='" . esc_url($link) . "' class='shariff_admininfo_cross'><div class='shariff_cross_icon'></div></a><p>" . __('Please check your ', 'shariff3UU') . "<a href='" . get_bloginfo('wpurl') . "/wp-admin/options-general.php?page=shariff3uu'>" . __('Shariff-Settings</a> - We have new detailed options where shariff buttons can be displayed! Also please read the FAQ about planed changes of the mail/mailto service functionality.', 'shariff3UU') . "</span></p></div>";
   }
 }
 add_action('admin_notices', 'shariff3UU_admin_notice');
@@ -586,8 +583,11 @@ add_action('admin_notices', 'shariff3UU_admin_notice');
 /* Helper function for shariff3UU_admin_notice() */
 function shariff3UU_nag_ignore() {
   global $current_user;
-  /* If user clicks to ignore the notice, add that to their user meta */
-  if ( isset($_GET['shariff3UU_nag_ignore']) && $_GET['shariff3UU_nag_ignore'] == '0' ) { add_user_meta($current_user->ID, 'shariff3UU_ignore_notice', 'true', true); }
+  $user_id = $current_user->ID;
+  // If user clicks to ignore the notice, add that to their user meta
+  if ( isset($_GET['shariff3UU_nag_ignore']) && '0' == sanitize_text_field($_GET['shariff3UU_nag_ignore']) ) {
+    add_user_meta($user_id, 'shariff3UU_ignore_notice', 'true', true);
+  }
 }
 add_action('admin_init', 'shariff3UU_nag_ignore');
 
