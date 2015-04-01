@@ -3,7 +3,7 @@
  * Plugin Name: Shariff for WordPress posts, pages, themes and as widget
  * Plugin URI: http://www.3uu.org/plugins.htm
  * Description: This is a wrapper to Shariff. Enables shares in posts and/or themes with Twitter, Facebook, GooglePlus... with no harm for visitors privacy.
- * Version: 1.7.1
+ * Version: 1.7.2
  * Author: Ritze
  * Author URI: http://www.DatenVerwurstungsZentrale.com/
  * License: http://opensource.org/licenses/MIT
@@ -122,7 +122,7 @@ function shariff3UU_options_init(){
   );
 
   add_settings_field( 'shariff3UU_text_services', 
-    __( 'Put in the service do you want enable (<code>facebook|twitter|googleplus|whatsapp|mail|mailto|printer|pinterest|linkedin|xing|reddit|stumbleupon|info</code>). Use the pipe sign | between two or more services.', 'shariff3UU' ), 
+    __( 'Put in the service do you want enable (<code>facebook|twitter|googleplus|whatsapp|mail|mailto| printer|pinterest|linkedin|xing|reddit|stumbleupon|info</code>). Use the pipe sign | between two or more services.', 'shariff3UU' ), 
     'shariff3UU_text_services_render', 'pluginPage', 'shariff3UU_pluginPage_section' 
   );
 
@@ -169,7 +169,7 @@ function shariff3UU_options_sanitize( $input ){
   if(isset($input["language"])) 		$valid["language"] 			= sanitize_text_field( $input["language"] );
   if(isset($input["theme"])) 			$valid["theme"] 			= sanitize_text_field( $input["theme"] );
   if(isset($input["vertical"])) 		$valid["vertical"] 			= absint( $input["vertical"] );
-  if(isset($input["services"])) 		$valid["services"] 			= sanitize_text_field( $input["services"] );
+  if(isset($input["services"])) 		$valid["services"] 			= str_replace(' ', '',sanitize_text_field( $input["services"] ));
   if(isset($input["backend"])) 			$valid["backend"] 			= absint( $input["backend"] );
   if(isset($input["twitter_via"])) 		$valid["twitter_via"] 			= str_replace('@', '', sanitize_text_field( $input["twitter_via"] ));
   // waiting for fix https://core.trac.wordpress.org/ticket/28015 in order to use esc_url_raw instead for info_url
@@ -181,15 +181,6 @@ function shariff3UU_options_sanitize( $input ){
 }
 
 // render admin options: use isset() to prevent errors while debug mode is on 
-
-#function shariff3UU_checkbox_add_all_render(){ 
-#  echo "<input type='checkbox' name='shariff3UU[add_all]' ".checked( $GLOBALS["shariff3UUoptions"]["add_all"], 1, 0 )." value='1'>";
-#}
-
-#function shariff3UU_checkbox_add_before_all_render(){
-#  echo "<input type='checkbox' name='shariff3UU[add_before_all]' ". checked( $GLOBALS["shariff3UUoptions"]["add_before_all"], 1, 0 ) ." value='1'>";
-#}
-
 function shariff3UU_checkbox_add_after_all_posts_render(){
   echo "<input type='checkbox' name='shariff3UU[add_after_all_posts]' ";
   if(isset($GLOBALS["shariff3UUoptions"]["add_after_all_posts"])) echo  checked( $GLOBALS["shariff3UUoptions"]["add_after_all_posts"], 1, 0 );
@@ -637,7 +628,7 @@ function shariff3UU_nag_ignore() {
   global $current_user;
   $user_id = $current_user->ID;
   // If user clicks to ignore the notice, add that to their user meta
-  if ( isset($_GET['shariff3UU_nag_ignore']) && '0' == sanitize_text_field($_GET['shariff3UU_nag_ignore']) ) {
+  if ( isset($_GET['shariff3UU_nag_ignore']) && sanitize_text_field($_GET['shariff3UU_nag_ignore'])=='0' ) {
     add_user_meta($user_id, 'shariff3UU_ignore_notice', 'true', true);
   }
 }
