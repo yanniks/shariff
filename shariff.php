@@ -144,6 +144,16 @@ function shariff3UU_options_init(){
     'shariff3UU_text_twittervia', __( 'Set the screen name for Twitter (via) to', 'shariff3UU' ),
     'shariff3UU_text_twittervia_render', 'pluginPage', 'shariff3UU_pluginPage_section'
   );
+  
+  // New alignment option
+  add_settings_field( 'shariff3UU_radio_align', __( 'Select the alignment of the shariff buttons.', 'shariff3UU' ),
+    'shariff3UU_radio_align_render', 'pluginPage', 'shariff3UU_pluginPage_section'
+  );
+  
+  // New alignment option for the widget
+  add_settings_field( 'shariff3UU_radio_align_widget', __( 'Select the alignment of the shariff buttons in the widget.', 'shariff3UU' ),
+    'shariff3UU_radio_align_widget_render', 'pluginPage', 'shariff3UU_pluginPage_section'
+  );
  
 }
 
@@ -165,6 +175,8 @@ function shariff3UU_options_sanitize( $input ){
   // waiting for fix https://core.trac.wordpress.org/ticket/28015 in order to use esc_url_raw instead for info_url
   if(isset($input["info_url"])) 		$valid["info_url"] 			= sanitize_text_field( $input["info_url"] );
   if(isset($input["style"])) 			$valid["style"] 			= sanitize_text_field( $input["style"] );
+  if(isset($input["align"])) 			$valid["align"] 			= sanitize_text_field( $input["align"] );
+  if(isset($input["align_widget"])) 	$valid["align_widget"] 		= sanitize_text_field( $input["align_widget"] );
   return $valid;
 }
 
@@ -271,6 +283,24 @@ function shariff3UU_text_style_render(){
 function shariff3UU_text_twittervia_render(){
   (isset($GLOBALS['shariff3UUoptions']['twitter_via'])) ? $twitter_via = $GLOBALS['shariff3UUoptions']['twitter_via'] : '';
   echo "<input type='text' name='shariff3UU[twitter_via]' value='". $twitter_via ."' size='50' placeholder='screenname'>";
+}
+
+function shariff3UU_radio_align_render(){
+  $options = $GLOBALS["shariff3UUoptions"]; if(!isset($options["align"]))$options["align"]='flex-start';
+  echo "<table border='0'><tr>
+  <td><input type='radio' name='shariff3UU[align]' value='flex-start' ".  checked( $options['align'], 'flex-start',0 )  .">left</td>
+  <td><input type='radio' name='shariff3UU[align]' value='center' ". checked( $options['align'], 'center',0 ) .">center</td>
+  <td><input type='radio' name='shariff3UU[align]' value='flex-end' ". checked( $options['align'], 'flex-end',0 ) .">right</td>
+  </tr></table>";
+}
+
+function shariff3UU_radio_align_widget_render(){
+  $options = $GLOBALS["shariff3UUoptions"]; if(!isset($options["align_widget"]))$options["align_widget"]='flex-start';
+  echo "<table border='0'><tr>
+  <td><input type='radio' name='shariff3UU[align_widget]' value='flex-start' ".  checked( $options['align_widget'], 'flex-start',0 )  .">left</td>
+  <td><input type='radio' name='shariff3UU[align_widget]' value='center' ". checked( $options['align_widget'], 'center',0 ) .">center</td>
+  <td><input type='radio' name='shariff3UU[align_widget]' value='flex-end' ". checked( $options['align_widget'], 'flex-end',0 ) .">right</td>
+  </tr></table>";
 }
                         
 function shariff3UU_options_section_callback(){
@@ -404,6 +434,29 @@ function shariffPosts($content) {
 
   return $content;
 }
+
+// add the align-style option to the css file
+function shariff3UU_align_styles() {
+	$shariff3UU = get_option( 'shariff3UU' );
+	if(isset($shariff3UU["align"]) || isset($shariff3UU["align_widget"])) {
+		$align = $shariff3UU["align"];
+		$align_widget = $shariff3UU["align_widget"];
+		wp_enqueue_style('shariffcss', plugins_url('/shariff.min.local.css',__FILE__));
+        $custom_css = "
+                .shariff { justify-content: {$align} } 
+				.shariff { -webkit-justify-content: {$align} }
+				.shariff ul { justify-content: {$align} } 
+				.shariff ul { -webkit-justify-content: {$align} } 
+				.widget .shariff { justify-content: {$align_widget} } 
+				.widget .shariff { -webkit-justify-content: {$align_widget} }
+				.widget .shariff ul { justify-content: {$align_widget} }
+				.widget .shariff ul { -webkit-justify-content: {$align_widget} }
+                ";
+        wp_add_inline_style( 'shariffcss', $custom_css );
+	}
+	else wp_enqueue_style('shariffcss', plugins_url('/shariff.min.local.css',__FILE__));
+}
+add_action( 'wp_enqueue_scripts', 'shariff3UU_align_styles' );
 
 // Render the shorttag to the HTML shorttag of Shariff
 function RenderShariff( $atts , $content = null) {
