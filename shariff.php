@@ -3,7 +3,7 @@
  * Plugin Name: Shariff for WordPress posts, pages, themes and as widget
  * Plugin URI: http://www.3uu.org/plugins.htm
  * Description: This is a wrapper to Shariff. Enables shares in posts and/or themes with Twitter, Facebook, GooglePlus... with no harm for visitors privacy.
- * Version: 1.7.2
+ * Version: 1.8
  * Author: Ritze
  * Author URI: http://www.DatenVerwurstungsZentrale.com/
  * License: http://opensource.org/licenses/MIT
@@ -136,22 +136,22 @@ function shariff3UU_options_init(){
   );
   
   add_settings_field(
-    'shariff3UU_text_style', __( 'CSS style attributes for the CSS container _around_ Shariff', 'shariff3UU' ),
-    'shariff3UU_text_style_render', 'pluginPage', 'shariff3UU_pluginPage_section'
-  );
-  
-  add_settings_field(
     'shariff3UU_text_twittervia', __( 'Set the screen name for Twitter (via) to', 'shariff3UU' ),
     'shariff3UU_text_twittervia_render', 'pluginPage', 'shariff3UU_pluginPage_section'
   );
-  
+
+  add_settings_field(
+    'shariff3UU_text_style', __( 'CSS style attributes for the CSS container _around_ Shariff', 'shariff3UU' ),
+    'shariff3UU_text_style_render', 'pluginPage', 'shariff3UU_pluginPage_section'
+  );
+              
   // New alignment option
-  add_settings_field( 'shariff3UU_radio_align', __( 'Select the alignment of the shariff buttons.', 'shariff3UU' ),
+  add_settings_field( 'shariff3UU_radio_align', __( 'Select the alignment of the Shariff buttons', 'shariff3UU' ),
     'shariff3UU_radio_align_render', 'pluginPage', 'shariff3UU_pluginPage_section'
   );
   
   // New alignment option for the widget
-  add_settings_field( 'shariff3UU_radio_align_widget', __( 'Select the alignment of the shariff buttons in the widget.', 'shariff3UU' ),
+  add_settings_field( 'shariff3UU_radio_align_widget', __( 'Select the alignment of the Shariff buttons in the widget', 'shariff3UU' ),
     'shariff3UU_radio_align_widget_render', 'pluginPage', 'shariff3UU_pluginPage_section'
   );
  
@@ -266,31 +266,31 @@ function shariff3UU_text_info_url_render(){
   echo "<input type='text' name='shariff3UU[info_url]' value='". esc_html($info_url) ."' size='50' placeholder='http://ct.de/-2467514'>";
 }
 
-function shariff3UU_text_style_render(){
-  (isset($GLOBALS['shariff3UUoptions']['style'])) ? $style = $GLOBALS['shariff3UUoptions']['style'] : '';  
-  echo "<input type='text' name='shariff3UU[style]' value='". esc_html($style) ."' size='50' placeholder='please read about it in the FAQ'>";
-}
-
 function shariff3UU_text_twittervia_render(){
   (isset($GLOBALS['shariff3UUoptions']['twitter_via'])) ? $twitter_via = $GLOBALS['shariff3UUoptions']['twitter_via'] : '';
   echo "<input type='text' name='shariff3UU[twitter_via]' value='". $twitter_via ."' size='50' placeholder='screenname'>";
 }
 
+function shariff3UU_text_style_render(){
+  (isset($GLOBALS['shariff3UUoptions']['style'])) ? $style = $GLOBALS['shariff3UUoptions']['style'] : '';
+  echo "<input type='text' name='shariff3UU[style]' value='". esc_html($style) ."' size='50' placeholder='please read about it in the FAQ'>";
+}
+
 function shariff3UU_radio_align_render(){
   $options = $GLOBALS["shariff3UUoptions"]; if(!isset($options["align"]))$options["align"]='flex-start';
   echo "<table border='0'><tr>
-  <td><input type='radio' name='shariff3UU[align]' value='flex-start' ".  checked( $options['align'], 'flex-start',0 )  .">left</td>
-  <td><input type='radio' name='shariff3UU[align]' value='center' ". checked( $options['align'], 'center',0 ) .">center</td>
-  <td><input type='radio' name='shariff3UU[align]' value='flex-end' ". checked( $options['align'], 'flex-end',0 ) .">right</td>
+  <td><input type='radio' name='shariff3UU[align]' value='flex-start' ". checked( $options['align'], 'flex-start',0 ) .">left</td>
+  <td><input type='radio' name='shariff3UU[align]' value='center' ".     checked( $options['align'], 'center',0 )     .">center</td>
+  <td><input type='radio' name='shariff3UU[align]' value='flex-end' ".   checked( $options['align'], 'flex-end',0 )   .">right</td>
   </tr></table>";
 }
 
 function shariff3UU_radio_align_widget_render(){
   $options = $GLOBALS["shariff3UUoptions"]; if(!isset($options["align_widget"]))$options["align_widget"]='flex-start';
   echo "<table border='0'><tr>
-  <td><input type='radio' name='shariff3UU[align_widget]' value='flex-start' ".  checked( $options['align_widget'], 'flex-start',0 )  .">left</td>
-  <td><input type='radio' name='shariff3UU[align_widget]' value='center' ". checked( $options['align_widget'], 'center',0 ) .">center</td>
-  <td><input type='radio' name='shariff3UU[align_widget]' value='flex-end' ". checked( $options['align_widget'], 'flex-end',0 ) .">right</td>
+  <td><input type='radio' name='shariff3UU[align_widget]' value='flex-start' ".	checked( $options['align_widget'], 'flex-start',0 ) .">left</td>
+  <td><input type='radio' name='shariff3UU[align_widget]' value='center' ". 	checked( $options['align_widget'], 'center',0 )     .">center</td>
+  <td><input type='radio' name='shariff3UU[align_widget]' value='flex-end' ". 	checked( $options['align_widget'], 'flex-end',0 )   .">right</td>
   </tr></table>";
 }
                         
@@ -428,24 +428,36 @@ function shariffPosts($content) {
 
 // add the align-style option to the css file
 function shariff3UU_align_styles() {
-	$shariff3UU = get_option( 'shariff3UU' );
-	if(isset($shariff3UU["align"]) || isset($shariff3UU["align_widget"])) {
-		$align = $shariff3UU["align"];
-		$align_widget = $shariff3UU["align_widget"];
-		wp_enqueue_style('shariffcss', plugins_url('/shariff.min.local.css',__FILE__));
-        $custom_css = "
-                .shariff { justify-content: {$align} } 
-				.shariff { -webkit-justify-content: {$align} }
-				.shariff ul { justify-content: {$align} } 
-				.shariff ul { -webkit-justify-content: {$align} } 
-				.widget .shariff { justify-content: {$align_widget} } 
-				.widget .shariff { -webkit-justify-content: {$align_widget} }
-				.widget .shariff ul { justify-content: {$align_widget} }
-				.widget .shariff ul { -webkit-justify-content: {$align_widget} }
-                ";
-        wp_add_inline_style( 'shariffcss', $custom_css );
-	}
-	else wp_enqueue_style('shariffcss', plugins_url('/shariff.min.local.css',__FILE__));
+  $shariff3UU = get_option( 'shariff3UU' );
+  $custom_css = '';
+
+  if(isset($shariff3UU["align"]) && $shariff3UU["align"]!='none') {
+     $align = $shariff3UU["align"];
+//     wp_enqueue_style('shariffcss', plugins_url('/shariff.min.local.css',__FILE__));
+     $custom_css .= "
+       .shariff { justify-content: {$align} }
+       .shariff { -webkit-justify-content: {$align} }
+       .shariff { -ms-flex-pack: {$align} }
+       .shariff ul { justify-content: {$align} }
+       .shariff ul { -webkit-justify-content: {$align} }
+       .shariff ul { -ms-flex-pack: {$align} }
+       ";
+  }
+
+  if(isset($shariff3UU["align_widget"]) && $shariff3UU["align_widget"]!='none') {
+     $align_widget = $shariff3UU["align_widget"];
+     $custom_css .= "
+       .widget .shariff { justify-content: {$align_widget} } 
+       .widget .shariff { -webkit-justify-content: {$align_widget} }
+       .widget .shariff { -ms-flex-pack: {$align_widget} }
+       .widget .shariff ul { justify-content: {$align_widget} }
+       .widget .shariff ul { -webkit-justify-content: {$align_widget} }
+       .widget .shariff ul { -ms-flex-pack: {$align_widget} }
+       ";
+  }
+
+  if($custom_css != '') wp_add_inline_style( 'shariffcss', $custom_css );
+//  else wp_enqueue_style('shariffcss', plugins_url('/shariff.min.local.css',__FILE__));
 }
 add_action( 'wp_enqueue_scripts', 'shariff3UU_align_styles' );
 
@@ -470,6 +482,8 @@ function RenderShariff( $atts , $content = null) {
   // the Styles/Fonts (We use a local copy of fonts because there is no
   // reason to send data to the hoster of the fonts. Am I paranoid? ;-)
   wp_enqueue_style('shariffcss',plugins_url('/shariff.min.local.css',__FILE__));
+  // make sure that use default WP jquery is loaded
+  wp_enqueue_script('jquery');
   // the JS must be loaded at footer. Make sure that wp_footer() is present in yout theme!
   wp_enqueue_script('shariffjs', plugins_url('/shariff.js',__FILE__),'','',true);
   
