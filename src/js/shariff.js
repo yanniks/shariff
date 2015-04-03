@@ -1,6 +1,10 @@
+// add to avoid warnings of jshint on the implementation of WP own jQuery
+/*global jQuery:false */
 'use strict';
 
-var $ = require('jquery');
+// do not needed on WP
+//var $ = require('jquery');
+var $ = jQuery.noConflict();
 var window = require('browserify-window');
 
 var _Shariff = function(element, options) {

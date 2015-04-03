@@ -63,16 +63,17 @@ module.exports = function(grunt) {
                     transform: [ ['uglifyify', { global: true } ] ]
                 },
                 src: 'src/js/shariff.js',
-                dest: 'build/shariff.js'
+                dest: 'build/shariff.complete.js'
             },
             wp_min: {
                 options: {
-                    transform: [ ['uglifyify', { global: true } ],
-				 ['browserify-shim', { global: true } ]
-		    ]
+                    transform: [
+                        ['uglifyify', { global: true } ],
+                        ['browserify-shim', { global: true } ]
+                    ]
                 },
                 src: 'src/js/shariff.js',
-                dest: 'build/shariff.min.js'
+                dest: 'build/shariff.js'
             },
             demo: {
                 options: {
@@ -217,6 +218,6 @@ module.exports = function(grunt) {
     grunt.registerTask('build', ['test', 'less:demo', 'less:dist', 'browserify:dist_complete_min', 'browserify:dist_min']);
     grunt.registerTask('demo', ['copy:demo', 'less:demo', 'browserify:demo', 'hapi', 'configureProxies:demo', 'connect']);
     grunt.registerTask('default', ['test', 'browserify:dev']);
-    grunt.registerTask('wp',      ['test', 'less:wp', 'browserify:wp']);
+    grunt.registerTask('wp',      ['test', 'less:wp', 'browserify:wp_min']);
     
 };
