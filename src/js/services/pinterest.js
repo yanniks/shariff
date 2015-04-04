@@ -20,6 +20,6 @@ module.exports = function(shariff) {
             'fr': 'Partager sur Pinterest',
 			'es': 'Compartir en Pinterest'
         },
-	shareUrl: '//www.pinterest.com/pin/create/button/?url=' + EncUrl + shariff.getReferrerTrack() + '&media=' + shariff.getImageUrl() + '&description=' + shariff.getShareText()
+	shareUrl: 'https://www.pinterest.com/pin/create/button/?url=' + EncUrl + shariff.getReferrerTrack() + '&media=' + shariff.getImageUrl() + '&description=' + shariff.getShareText()
     };
 };

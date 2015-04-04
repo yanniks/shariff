@@ -20,6 +20,6 @@ module.exports = function(shariff) {
             'fr': 'Partager sur Reddit',
 			'es': 'Compartir en Reddit'
         },
-		shareUrl: '//www.reddit.com/submit?url=' + EncUrl + shariff.getReferrerTrack()
+		shareUrl: 'https://www.reddit.com/submit?url=' + EncUrl + shariff.getReferrerTrack()
     };
 };

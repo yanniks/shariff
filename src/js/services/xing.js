@@ -20,6 +20,6 @@ module.exports = function(shariff) {
             'fr': 'Partager sur XING',
 			'es': 'Compartir en XING'
         },
-		shareUrl: '//www.xing.com/social_plugins/share?url=' + EncUrl + shariff.getReferrerTrack()
+		shareUrl: 'https://www.xing.com/social_plugins/share?url=' + EncUrl + shariff.getReferrerTrack()
     };
 };

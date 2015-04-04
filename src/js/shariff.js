@@ -4,7 +4,7 @@
 
 // do not needed on WP
 //var $ = require('jquery');
-var $ = jQuery.noConflict();
+var $jq3uu = jQuery.noConflict();
 var window = require('browserify-window');
 
 var _Shariff = function(element, options) {
@@ -13,7 +13,7 @@ var _Shariff = function(element, options) {
     // the DOM element that will contain the buttons
     this.element = element;
 
-    this.options = $.extend({}, this.defaults, options, $(element).data());
+    this.options = $jq3uu.extend({}, this.defaults, options, $jq3uu(element).data());
 
     // available services. /!\ Browserify can't require dynamically by now.
     var availableServices = [
@@ -33,7 +33,7 @@ var _Shariff = function(element, options) {
     ];
 
     // filter available services to those that are enabled and initialize them
-    this.services = $.map(this.options.services, function(serviceName) {
+    this.services = $jq3uu.map(this.options.services, function(serviceName) {
         var service;
         availableServices.forEach(function(availableService) {
             availableService = availableService(self);
@@ -48,7 +48,7 @@ var _Shariff = function(element, options) {
     this._addButtonList();
 
     if (this.options.backendUrl !== null) {
-        this.getShares().then( $.proxy( this._updateCounts, this ) );
+        this.getShares().then( $jq3uu.proxy( this._updateCounts, this ) );
     }
 
 };
@@ -84,7 +84,7 @@ _Shariff.prototype = {
         // build URI from rel="canonical" or document.location
         url: function() {
             var url = global.document.location.href;
-            var canonical = $('link[rel=canonical]').attr('href') || this.getMeta('og:url') || '';
+            var canonical = $jq3uu('link[rel=canonical]').attr('href') || this.getMeta('og:url') || '';
 
             if (canonical.length > 0) {
                 if (canonical.indexOf('http') < 0) {
@@ -98,7 +98,7 @@ _Shariff.prototype = {
     },
 
     $socialshareElement: function() {
-        return $(this.element);
+        return $jq3uu(this.element);
     },
 
     getLocalized: function(data, key) {
@@ -112,7 +112,7 @@ _Shariff.prototype = {
 
     // returns content of <meta name="" content=""> tags or '' if empty/non existant
     getMeta: function(name) {
-        var metaContent = $('meta[name="' + name + '"],[property="' + name + '"]').attr('content');
+        var metaContent = $jq3uu('meta[name="' + name + '"],[property="' + name + '"]').attr('content');
         return metaContent || '';
     },
 
@@ -133,22 +133,22 @@ _Shariff.prototype = {
 
     getURL: function() {
         var url = this.options.url;
-        return ( typeof url === 'function' ) ? $.proxy(url, this)() : url;
+        return ( typeof url === 'function' ) ? $jq3uu.proxy(url, this)() : url;
     },
 
     getService: function() {
         var service = this.options.service;
-        return ( typeof service === 'function' ) ? $.proxy(service, this)() : service;
+        return ( typeof service === 'function' ) ? $jq3uu.proxy(service, this)() : service;
     },
 
     getTTL: function() {
         var ttl = this.options.ttl;
-        return ( typeof ttl === 'function' ) ? $.proxy(ttl, this)() : ttl;
+        return ( typeof ttl === 'function' ) ? $jq3uu.proxy(ttl, this)() : ttl;
     },
 	
     getTemp: function() {
         var temp = this.options.temp;
-        return ( typeof temp === 'function' ) ? $.proxy(temp, this)() : temp;
+        return ( typeof temp === 'function' ) ? $jq3uu.proxy(temp, this)() : temp;
     },
 	
     getReferrerTrack: function() {
@@ -157,17 +157,17 @@ _Shariff.prototype = {
 
     // returns shareCounts of document
     getShares: function() {
-        return $.getJSON(this.options.backendUrl + '?url=' + encodeURIComponent(this.getURL()) + '&temp=' + encodeURIComponent(this.getTemp()) + '&ttl=' + encodeURIComponent(this.getTTL()) + '&service=' + encodeURIComponent(this.getService()));
+        return $jq3uu.getJSON(this.options.backendUrl + '?url=' + encodeURIComponent(this.getURL()) + '&temp=' + encodeURIComponent(this.getTemp()) + '&ttl=' + encodeURIComponent(this.getTTL()) + '&service=' + encodeURIComponent(this.getService()));
     },
 
     // add value of shares for each service
     _updateCounts: function(data) {
         var self = this;
-        $.each(data, function(key, value) {
+        $jq3uu.each(data, function(key, value) {
             if(value >= 1000) {
                 value = Math.round(value / 1000) + 'k';
             }
-            $(self.element).find('.' + key + ' a').append('<span class="share_count">' + value);
+            $jq3uu(self.element).find('.' + key + ' a').append('<span class="share_count">' + value);
         });
     },
 
@@ -180,15 +180,15 @@ _Shariff.prototype = {
         var themeClass = 'theme-' + this.options.theme;
         var orientationClass = 'orientation-' + this.options.orientation;
 
-        var $buttonList = $('<ul>').addClass(themeClass).addClass(orientationClass);
+        var $buttonList = $jq3uu('<ul>').addClass(themeClass).addClass(orientationClass);
 		
         // add html for service-links
         this.services.forEach(function(service) {
 			if (!service.mobileonly || (typeof window.orientation !== 'undefined') || (typeof(window.document.ontouchstart) === 'object')) {
-          	  	var $li = $('<li class="shariff-button">').addClass(service.name);
+          	  	var $li = $jq3uu('<li class="shariff-button">').addClass(service.name);
          		var $shareText = '<span class="share_text">' + self.getLocalized(service, 'shareText');
 
-          	  	var $shareLink = $('<a>')
+          	  	var $shareLink = $jq3uu('<a>')
           			.attr('href', service.shareUrl)
  					.append($shareText);
 
@@ -213,8 +213,8 @@ _Shariff.prototype = {
         $buttonList.on('click', '[rel="popup"]', function(e) {
             e.preventDefault();
 
-            var url = $(this).attr('href');
-            var windowName = $(this).attr('title');
+            var url = $jq3uu(this).attr('href');
+            var windowName = $jq3uu(this).attr('title');
             var windowSizeX = '600';
             var windowSizeY = '460';
             var windowSize = 'width=' + windowSizeX + ',height=' + windowSizeY;
@@ -248,7 +248,7 @@ _Shariff.prototype = {
         if (title.length > 0 && creator.length > 0) {
             title += ' - ' + creator;
         } else {
-            title = $('title').text();
+            title = $jq3uu('title').text();
         }
 	if (this.options.title.length > 0) {
 		title = this.options.title;
@@ -261,7 +261,7 @@ _Shariff.prototype = {
 module.exports = _Shariff;
 
 // initialize .shariff elements
-$('.shariff').each(function() {
+$jq3uu('.shariff').each(function() {
     if (!this.hasOwnProperty('shariff')) {
         this.shariff = new _Shariff(this);
     }

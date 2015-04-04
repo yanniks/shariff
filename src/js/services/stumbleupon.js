@@ -20,6 +20,6 @@ module.exports = function(shariff) {
             'fr': 'Partager sur StumbleUpon',
 			'es': 'Compartir en StumbleUpon'
         },
-		shareUrl: '//www.stumbleupon.com/submit?url=' + EncUrl + shariff.getReferrerTrack()
+		shareUrl: 'https://www.stumbleupon.com/submit?url=' + EncUrl + shariff.getReferrerTrack()
     };
 };
