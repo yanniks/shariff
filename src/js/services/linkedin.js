@@ -20,6 +20,6 @@ module.exports = function(shariff) {
             'fr': 'Partager sur LinkedIn',
             'es': 'Compartir en LinkedIn'
         },
-        shareUrl: 'https://www.linkedin.com/shareArticle?mini=true&url=' + liEncUrl + shariff.getReferrerTrack() + '&title=' + shariff.getShareText() + '&summary=&source='
+        shareUrl: 'https://www.linkedin.com/shareArticle?mini=true&url=' + liEncUrl + shariff.getReferrerTrack() + '&title=' + shariff.getTitle() + '&summary=&source='
     };
 };
