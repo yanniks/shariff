@@ -13,7 +13,7 @@ module.exports = function(shariff) {
             'es': '+1'
         },
         name: 'googleplus',
-        faName: 'fa-google-plus',
+        faName: 's3uu-google-plus',
         title: {
             'de': 'Bei Google+ teilen',
             'en': 'Share on Google+',

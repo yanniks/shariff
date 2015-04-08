@@ -12,7 +12,7 @@ module.exports = function(shariff) {
             'es': 'imprimir'
         },
         name: 'printer',
-        faName: 'fa-print',
+        faName: 's3uu-print',
         title: {
             'de': 'Drucken',
             'en': 'Printer',

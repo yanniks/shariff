@@ -193,7 +193,7 @@ _Shariff.prototype = {
  					.append($shareText);
 
          		if (typeof service.faName !== 'undefined') {
-         		   $shareLink.prepend('<span class="fa ' +  service.faName + '">');
+         		   $shareLink.prepend('<span class="s3uu ' +  service.faName + '">');
             	}
 
 				if (service.popup) {

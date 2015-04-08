@@ -13,7 +13,7 @@ module.exports = function(shariff) {
             'es': 'Pin it'
         },
         name: 'pinterest',
-	faName: 'fa-pinterest',
+	faName: 's3uu-pinterest',
         title: {
             'de': 'Bei Pinterest pinnen',
             'en': 'Pin it on Pinterest',
