@@ -122,7 +122,7 @@ function shariff3UU_options_init(){
   );
 
   add_settings_field( 'shariff3UU_text_services', 
-    __( 'Put in the service do you want enable (<code>facebook|twitter|googleplus|whatsapp|mail|mailto| printer|pinterest|linkedin|xing|reddit|stumbleupon|info</code>). Use the pipe sign | between two or more services.', 'shariff3UU' ), 
+    __( 'Put in the service do you want enable (<code>facebook|twitter|googleplus|whatsapp|mail|mailto|printer| pinterest|linkedin|xing|reddit|stumbleupon|flattr|info</code>). Use the pipe sign | between two or more services.', 'shariff3UU' ), 
     'shariff3UU_text_services_render', 'pluginPage', 'shariff3UU_pluginPage_section' 
   );
 
@@ -138,6 +138,11 @@ function shariff3UU_options_init(){
   add_settings_field(
     'shariff3UU_text_twittervia', __( 'Set the screen name for Twitter (via) to', 'shariff3UU' ),
     'shariff3UU_text_twittervia_render', 'pluginPage', 'shariff3UU_pluginPage_section'
+  );
+
+  add_settings_field(
+    'shariff3UU_text_flattruser', __( 'Set the username for Flattr to', 'shariff3UU' ),
+    'shariff3UU_text_flattruser_render', 'pluginPage', 'shariff3UU_pluginPage_section'
   );
 
   add_settings_field(
@@ -172,6 +177,7 @@ function shariff3UU_options_sanitize( $input ){
   if(isset($input["services"])) 		$valid["services"] 			= str_replace(' ', '',sanitize_text_field( $input["services"] ));
   if(isset($input["backend"])) 			$valid["backend"] 			= absint( $input["backend"] );
   if(isset($input["twitter_via"])) 		$valid["twitter_via"] 			= str_replace('@', '', sanitize_text_field( $input["twitter_via"] ));
+  if(isset($input["flattruser"]))    $valid["flattruser"]       = str_replace('@', '', sanitize_text_field( $input["flattruser"] ));
   // waiting for fix https://core.trac.wordpress.org/ticket/28015 in order to use esc_url_raw instead for info_url
   if(isset($input["info_url"])) 		$valid["info_url"] 			= sanitize_text_field( $input["info_url"] );
   if(isset($input["style"])) 			$valid["style"] 			= sanitize_text_field( $input["style"] );
@@ -271,26 +277,31 @@ function shariff3UU_text_twittervia_render(){
   echo "<input type='text' name='shariff3UU[twitter_via]' value='". $twitter_via ."' size='50' placeholder='screenname'>";
 }
 
+function shariff3UU_text_flattruser_render(){
+  (isset($GLOBALS['shariff3UUoptions']['flattruser'])) ? $flattruser = $GLOBALS['shariff3UUoptions']['flattruser'] : '';
+  echo "<input type='text' name='shariff3UU[flattruser]' value='". $flattruser ."' size='50' placeholder='username'>";
+}
+
 function shariff3UU_text_style_render(){
   (isset($GLOBALS['shariff3UUoptions']['style'])) ? $style = $GLOBALS['shariff3UUoptions']['style'] : '';
-  echo "<input type='text' name='shariff3UU[style]' value='". esc_html($style) ."' size='50' placeholder='please read about it in the FAQ'>";
+  echo "<input type='text' name='shariff3UU[style]' value='". esc_html($style) ."' size='50' placeholder='".__( 'please read about it in the FAQ', 'shariff3UU' )."'>";
 }
 
 function shariff3UU_radio_align_render(){
   $options = $GLOBALS["shariff3UUoptions"]; if(!isset($options["align"]))$options["align"]='flex-start';
   echo "<table border='0'><tr>
-  <td><input type='radio' name='shariff3UU[align]' value='flex-start' ". checked( $options['align'], 'flex-start',0 ) .">left</td>
-  <td><input type='radio' name='shariff3UU[align]' value='center' ".     checked( $options['align'], 'center',0 )     .">center</td>
-  <td><input type='radio' name='shariff3UU[align]' value='flex-end' ".   checked( $options['align'], 'flex-end',0 )   .">right</td>
+  <td><input type='radio' name='shariff3UU[align]' value='flex-start' ". checked( $options['align'], 'flex-start',0 ) .">".__( 'left', 'shariff3UU' )."</td>
+  <td><input type='radio' name='shariff3UU[align]' value='center' ".     checked( $options['align'], 'center',0 )     .">".__( 'center', 'shariff3UU' )."</td>
+  <td><input type='radio' name='shariff3UU[align]' value='flex-end' ".   checked( $options['align'], 'flex-end',0 )   .">".__( 'right', 'shariff3UU' )."</td>
   </tr></table>";
 }
 
 function shariff3UU_radio_align_widget_render(){
   $options = $GLOBALS["shariff3UUoptions"]; if(!isset($options["align_widget"]))$options["align_widget"]='flex-start';
   echo "<table border='0'><tr>
-  <td><input type='radio' name='shariff3UU[align_widget]' value='flex-start' ".	checked( $options['align_widget'], 'flex-start',0 ) .">left</td>
-  <td><input type='radio' name='shariff3UU[align_widget]' value='center' ". 	checked( $options['align_widget'], 'center',0 )     .">center</td>
-  <td><input type='radio' name='shariff3UU[align_widget]' value='flex-end' ". 	checked( $options['align_widget'], 'flex-end',0 )   .">right</td>
+  <td><input type='radio' name='shariff3UU[align_widget]' value='flex-start' ".	checked( $options['align_widget'], 'flex-start',0 ) .">".__( 'left', 'shariff3UU' )."</td>
+  <td><input type='radio' name='shariff3UU[align_widget]' value='center' ". 	checked( $options['align_widget'], 'center',0 )     .">".__( 'center', 'shariff3UU' )."</td>
+  <td><input type='radio' name='shariff3UU[align_widget]' value='flex-end' ". 	checked( $options['align_widget'], 'flex-end',0 )   .">".__( 'right', 'shariff3UU' )."</td>
   </tr></table>";
 }
                         
@@ -358,6 +369,9 @@ function buildShariffShorttag(){
   if(!empty($shariff3UU["style"])) $shorttag.=' style="'.$shariff3UU["style"].'"';
   // *** twitter-via ***
   if(!empty($shariff3UU["twitter_via"])) $shorttag.=' twitter_via="'.$shariff3UU["twitter_via"].'"';
+
+  // *** flatter-username ***
+  if(!empty($shariff3UU["flattruser"])) $shorttag.=' flattruser="'.$shariff3UU["flattruser"].'"';
 
   // close the shorttag
   $shorttag.=']';
@@ -474,6 +488,7 @@ function RenderShariff( $atts , $content = null) {
     if(!empty($shariff3UU["language"]))		$atts["language"]=$shariff3UU["language"];
     if(!empty($shariff3UU["info_url"]))		$atts["info_url"]=$shariff3UU["info_url"];
     if(!empty($shariff3UU["twitter_via"]))	$atts["twitter_via"]=$shariff3UU["twitter_via"];
+    if(!empty($shariff3UU["flattruser"])) $atts["flattruser"]=$shariff3UU["flattruser"];
     if(isset($shariff3UU["vertical"]))		if($shariff3UU["vertical"]=='1') 		$atts["orientation"]='vertical';
     if(isset($shariff3UU["backend"]))		if($shariff3UU["backend"]=='1') 		$atts["backend"]='on';
   }
@@ -507,6 +522,7 @@ function RenderShariff( $atts , $content = null) {
   if(array_key_exists('image', $atts))       $output.=" data-image='".		esc_html($atts['image'])."'";
   if(array_key_exists('media', $atts))       $output.=" data-media='".		esc_html($atts['media'])."'";
   if(array_key_exists('twitter_via', $atts)) $output.=" data-twitter-via='".	esc_html($atts['twitter_via'])."'";
+  if(array_key_exists('flattruser', $atts)) $output.=" data-flattruser='".  esc_html($atts['flattruser'])."'";
   
   // if services are set do only use this
   if(array_key_exists('services', $atts)){
