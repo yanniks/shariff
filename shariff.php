@@ -532,7 +532,11 @@ function RenderShariff( $atts , $content = null) {
     // prevent error while debug mode is on
     $strServices='';
     // walk 
-    while (list($key, $val) = each($s)){ $strServices.='"'.$val.'", '; }
+    while (list($key, $val) = each($s)) { 
+      // check if flattr-username is set if flattr is selected
+      if($val!='flattr') $strServices.='"'.$val.'", ';
+      elseif (array_key_exists('flattruser', $atts)) $strServices.='"'.$val.'", ';
+    }
     // remove the separator and add it to output
     $output.=substr($strServices, 0, -2);
     $output.=']\'';
