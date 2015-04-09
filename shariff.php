@@ -531,11 +531,13 @@ function RenderShariff( $atts , $content = null) {
     $output.=' data-services=\'[';
     // prevent error while debug mode is on
     $strServices='';
+    $flattr_error='';
     // walk 
     while (list($key, $val) = each($s)) { 
       // check if flattr-username is set if flattr is selected
       if($val!='flattr') $strServices.='"'.$val.'", ';
       elseif (array_key_exists('flattruser', $atts)) $strServices.='"'.$val.'", ';
+      else $flattr_error='1';
     }
     // remove the separator and add it to output
     $output.=substr($strServices, 0, -2);
@@ -551,6 +553,10 @@ function RenderShariff( $atts , $content = null) {
   
   // close the container
   $output.='></div>';
+
+  // display warning to admins if flattr is set, but no flattrusername is provided
+  if($flattr_error=='1' && current_user_can( 'manage_options' )) $output.='<div style="background-color:#ff0000;color:#fff;font-size:20px;font-weight:bold;padding:10px;text-align:center;margin:0 auto;line-height:1.5;">Username for Flattr is missing!</div>';
+
   // if we had have a style attribute too
   if(array_key_exists('style', $atts))$output.='</div>';
   
