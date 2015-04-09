@@ -614,12 +614,23 @@ class ShariffWidget extends WP_Widget {
     // if is not configured, use the global options from admin menu
     if ($instance['shariff-tag']=='[shariff]') $shorttag=buildShariffShorttag();
     else $shorttag=$instance['shariff-tag'];
-    // set url and title to current page to prevent sharing the first or last post on pages with multiple posts e.g. the overview page
-    $page_url = get_bloginfo('wpurl') . esc_url_raw($_SERVER['REQUEST_URI']);
+    // set url to current page to prevent sharing the first or last post on pages with multiple posts e.g. the overview page
+    $wpurl = get_bloginfo('wpurl');
+    $siteurl = get_bloginfo('url');
+    // for "normal" installations
+    $page_url = $wpurl . esc_url_raw($_SERVER['REQUEST_URI']);
+    // if wordpress is installed in a subdirectory, but links are mapped to the main domain
+    if ($wpurl != $siteurl) {
+      $subdir = str_replace ( $siteurl , '' , $wpurl );
+      $page_url = str_replace ( $subdir , '' , $page_url );
+    }
+
+    // same for title
     $wp_title = wp_title( '', false);
     if(!empty($wp_title)) $page_title = ltrim($wp_title); // wp_title for all pages that have it
     else $page_title = get_bloginfo('name'); // the site name for static start pages where wp_title is not set
     $shorttag=substr($shorttag,0,-1)." title='".$page_title."' url='".$page_url."']"; // add url and title to the shorttag
+
     // process the shortcode
     echo do_shortcode($shorttag);
     // close Container
