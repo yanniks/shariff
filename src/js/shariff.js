@@ -29,7 +29,8 @@ var _Shariff = function(element, options) {
         require('./services/pinterest'),
 	require('./services/reddit'),
 	require('./services/stumbleupon'),
-        require('./services/printer')
+        require('./services/printer'),
+        require('./services/flattr')
     ];
 
     // filter available services to those that are enabled and initialize them
@@ -223,8 +224,8 @@ _Shariff.prototype = {
 
             var url = $jq3uu(this).attr('href');
             var windowName = $jq3uu(this).attr('title');
-            var windowSizeX = '600';
-            var windowSizeY = '460';
+            var windowSizeX = '1000';
+            var windowSizeY = '500';
             var windowSize = 'width=' + windowSizeX + ',height=' + windowSizeY;
 
             global.window.open(url, windowName, windowSize);
