@@ -660,4 +660,12 @@ function shariff3UU_nag_ignore() {
 }
 add_action('admin_init', 'shariff3UU_nag_ignore');
 
+/* Display an info notice if flattr is set as a service, but no username is entered */
+function shariff3UU_flattr_notice() {
+  $shariff3UU = get_option( 'shariff3UU' );
+  if((strpos($shariff3UU["services"], 'flattr') != false) && empty($shariff3UU["flattruser"]) && current_user_can( 'manage_options' )) {
+    echo "<div class='error'><p>" . __('Please check your ', 'shariff3UU') . "<a href='" . get_bloginfo('wpurl') . "/wp-admin/options-general.php?page=shariff3uu'>" . __('Shariff-Settings</a> - Flattr was selected, but no username was provided! Please enter your <strong>Flattr username</strong> in the shariff options!', 'shariff3UU') . "</span></p></div>";
+  }
+}
+add_action('admin_notices', 'shariff3UU_flattr_notice');
 ?>

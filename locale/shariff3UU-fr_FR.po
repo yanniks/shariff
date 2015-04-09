@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Shariff for WP posts, pages, themes and as widget v1.2.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2015-04-09 14:52+0100\n"
+"PO-Revision-Date: 2015-04-09 21:07+0100\n"
 "Last-Translator: admin3uu <support@3uu.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -162,3 +162,8 @@ msgstr "centre"
 #: shariff.php:294
 msgid "right"
 msgstr "droit"
+
+# @ shariff3UU
+#: shariff.php:667
+msgid "Shariff-Settings</a> - Flattr was selected, but no username was provided! Please enter your <strong>Flattr username</strong> in the shariff options!"
+msgstr "Shariff-Paramètres</a> - Flattr est sélectionné mais aucun nom d'utilisateur spécifié! Se il vous plaît entrez votre propre <strong>nom d'utilisateur</strong> dans les paramètres Flattr Shariff!"
