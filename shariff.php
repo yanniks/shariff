@@ -566,8 +566,14 @@ function RenderShariff( $atts , $content = null) {
     $output.=' data-services=\'[';
     // prevent error while debug mode is on
     $strServices='';
+    $flattr_error='';
     // walk 
-    while (list($key, $val) = each($s)){ $strServices.='"'.$val.'", '; }
+    while (list($key, $val) = each($s)) { 
+      // check if flattr-username is set if flattr is selected
+      if($val!='flattr') $strServices.='"'.$val.'", ';
+      elseif (array_key_exists('flattruser', $atts)) $strServices.='"'.$val.'", ';
+      else $flattr_error='1';
+    }
     // remove the separator and add it to output
     $output.=substr($strServices, 0, -2);
     $output.=']\'';
@@ -582,6 +588,10 @@ function RenderShariff( $atts , $content = null) {
   
   // close the container
   $output.='></div>';
+
+  // display warning to admins if flattr is set, but no flattrusername is provided
+  if($flattr_error=='1' && current_user_can( 'manage_options' )) $output.='<div style="background-color:#ff0000;color:#fff;font-size:20px;font-weight:bold;padding:10px;text-align:center;margin:0 auto;line-height:1.5;">Username for Flattr is missing!</div>';
+
   // if we had have a style attribute too
   if(array_key_exists('style', $atts))$output.='</div>';
   
@@ -699,4 +709,12 @@ function shariff3UU_nag_ignore() {
 }
 add_action('admin_init', 'shariff3UU_nag_ignore');
 
+/* Display an info notice if flattr is set as a service, but no username is entered */
+function shariff3UU_flattr_notice() {
+  $shariff3UU = get_option( 'shariff3UU' );
+  if((strpos($shariff3UU["services"], 'flattr') != false) && empty($shariff3UU["flattruser"]) && current_user_can( 'manage_options' )) {
+    echo "<div class='error'><p>" . __('Please check your ', 'shariff3UU') . "<a href='" . get_bloginfo('wpurl') . "/wp-admin/options-general.php?page=shariff3uu'>" . __('Shariff-Settings</a> - Flattr was selected, but no username was provided! Please enter your <strong>Flattr username</strong> in the shariff options!', 'shariff3UU') . "</span></p></div>";
+  }
+}
+add_action('admin_notices', 'shariff3UU_flattr_notice');
 ?>
