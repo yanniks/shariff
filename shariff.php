@@ -3,7 +3,7 @@
  * Plugin Name: Shariff for WordPress posts, pages, themes and as widget
  * Plugin URI: http://www.3uu.org/plugins.htm
  * Description: This is a wrapper to Shariff. Enables shares in posts and/or themes with Twitter, Facebook, GooglePlus... with no harm for visitors privacy.
- * Version: 1.8.1
+ * Version: 1.9.0
  * Author: Ritze
  * Author URI: http://www.DatenVerwurstungsZentrale.com/
  * License: http://opensource.org/licenses/MIT
@@ -36,9 +36,7 @@ if ( is_admin() ){
 function shariff3UU_update() {
  
 /******************** VERSION ANPASSEN *******************************/
-
-$code_version = "1.8.5"; // Set code version - needs to be adjusted for every new version!
-
+$code_version = "1.9.0"; // Set code version - needs to be adjusted for every new version!
 /******************** VERSION ANPASSEN *******************************/
 
   // get options
@@ -212,14 +210,16 @@ function shariff3UU_options_sanitize( $input ){
   if(isset($input["services"])) 		$valid["services"] 			= str_replace(' ', '',sanitize_text_field( $input["services"] ));
   if(isset($input["backend"])) 			$valid["backend"] 			= absint( $input["backend"] );
   if(isset($input["twitter_via"])) 		$valid["twitter_via"] 			= str_replace('@', '', sanitize_text_field( $input["twitter_via"] ));
-  if(isset($input["flattruser"]))    $valid["flattruser"]       = str_replace('@', '', sanitize_text_field( $input["flattruser"] ));
+  if(isset($input["flattruser"]))    		$valid["flattruser"]       		= str_replace('@', '', sanitize_text_field( $input["flattruser"] ));
   // waiting for fix https://core.trac.wordpress.org/ticket/28015 in order to use esc_url_raw instead for info_url
   if(isset($input["info_url"])) 		$valid["info_url"] 			= sanitize_text_field( $input["info_url"] );
   if(isset($input["style"])) 			$valid["style"] 			= sanitize_text_field( $input["style"] );
   if(isset($input["align"])) 			$valid["align"] 			= sanitize_text_field( $input["align"] );
-  if(isset($input["align_widget"])) 	$valid["align_widget"] 		= sanitize_text_field( $input["align_widget"] );
-  if(isset($input["version"]))   $valid["version"]    = sanitize_text_field( $input["version"] );
-  if(isset($input["new"]))   $valid["new"]    = absint( $input["new"] );
+  if(isset($input["align_widget"])) 		$valid["align_widget"] 			= sanitize_text_field( $input["align_widget"] );
+  //rtzrtz20150410: Bei Gelegenheit checken, ob version und new ueberhaupt irgendwo durch user-Input gesetzt werden koennen. 
+  // Hier auf jeden Fall unschaedlich, aber vielleicht auch unnotig. 
+  if(isset($input["version"]))   		$valid["version"]    			= sanitize_text_field( $input["version"] );
+  if(isset($input["new"]))   			$valid["new"]    			= absint( $input["new"] );
   return $valid;
 }
 
@@ -532,6 +532,7 @@ function RenderShariff( $atts , $content = null) {
   }
 
   // Use the backend option for every option that is not set in the shorttag (only for new installations)
+  if(!isset($shariff3UU["new"]))$shariff3UU["new"]='1';
   if($shariff3UU["new"]=='1') {
     $backend_options = $shariff3UU;
     if(isset($shariff3UU["vertical"]))  if($shariff3UU["vertical"]=='1')    $backend_options["vertical"]='vertical';
