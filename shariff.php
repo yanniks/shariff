@@ -67,9 +67,12 @@ $code_version = "1.8.5"; // Set code version - needs to be adjusted for every ne
 
     // Delete user meta entry shariff_ignore_notice to display update message again after an update
     $users = get_users('role=administrator');
-    foreach ($users as $user) { if ( !get_user_meta($user, 'shariff_ignore_notice' )) { delete_user_meta($user->ID, 'shariff3UU_ignore_notice'); } }
+    foreach ($users as $user) { if( !get_user_meta($user, 'shariff3UU_ignore_notice' )) { delete_user_meta($user->ID, 'shariff3UU_ignore_notice'); } }
 
     /* End update procedures */
+
+    // Is it a new installation? Used for the new default behaviour regarding missing options in the shorttag.
+    if(empty($GLOBALS["shariff3UUoptions"]["version"])) $GLOBALS["shariff3UUoptions"]["new"]='1';
 
     // Update options version
     $GLOBALS["shariff3UUoptions"]["version"] = $code_version;
@@ -216,6 +219,7 @@ function shariff3UU_options_sanitize( $input ){
   if(isset($input["align"])) 			$valid["align"] 			= sanitize_text_field( $input["align"] );
   if(isset($input["align_widget"])) 	$valid["align_widget"] 		= sanitize_text_field( $input["align_widget"] );
   if(isset($input["version"]))   $valid["version"]    = sanitize_text_field( $input["version"] );
+  if(isset($input["new"]))   $valid["new"]    = absint( $input["new"] );
   return $valid;
 }
 
@@ -525,6 +529,14 @@ function RenderShariff( $atts , $content = null) {
     if(!empty($shariff3UU["flattruser"])) $atts["flattruser"]=$shariff3UU["flattruser"];
     if(isset($shariff3UU["vertical"]))		if($shariff3UU["vertical"]=='1') 		$atts["orientation"]='vertical';
     if(isset($shariff3UU["backend"]))		if($shariff3UU["backend"]=='1') 		$atts["backend"]='on';
+  }
+
+  // Use the backend option for every option that is not set in the shorttag (only for new installations)
+  if($shariff3UU["new"]=='1') {
+    $backend_options = $shariff3UU;
+    if(isset($shariff3UU["vertical"]))  if($shariff3UU["vertical"]=='1')    $backend_options["vertical"]='vertical';
+    if(isset($shariff3UU["backend"]))   if($shariff3UU["backend"]=='1')     $backend_options["backend"]='on';
+    $atts = array_merge($backend_options,$atts);
   }
 
   // make sure that use default WP jquery is loaded
