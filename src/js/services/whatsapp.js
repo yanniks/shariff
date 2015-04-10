@@ -26,7 +26,7 @@ module.exports = function(shariff) {
             'nl': 'delen'
         },
         name: 'whatsapp',
-        faName: 'fa-whatsapp',
+        faName: 's3uu-whatsapp',
         title: {
             'de': 'Bei Whatsapp teilen',
             'en': 'Share on Whatsapp',

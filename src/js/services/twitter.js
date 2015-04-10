@@ -44,7 +44,7 @@ module.exports = function(shariff) {
 		mobileonly: false,
         shareText: 'tweet',
         name: 'twitter',
-        faName: 'fa-twitter',
+        faName: 's3uu-twitter',
         title: {
             'de': 'Bei Twitter teilen',
             'en': 'Share on Twitter',
