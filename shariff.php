@@ -37,7 +37,7 @@ function shariff3UU_update() {
  
 /******************** VERSION ANPASSEN *******************************/
 
-$code_version = "1.84"; // Set code version - needs to be adjusted for every new version!
+$code_version = "1.8.5"; // Set code version - needs to be adjusted for every new version!
 
 /******************** VERSION ANPASSEN *******************************/
 
@@ -45,7 +45,7 @@ $code_version = "1.84"; // Set code version - needs to be adjusted for every new
   $GLOBALS["shariff3UUoptions"]=get_option( 'shariff3UU' );
   
   // check version
-  if(empty($GLOBALS["shariff3UUoptions"]["version"]) || $GLOBALS["shariff3UUoptions"]["version"] < $code_version){
+  if(empty($GLOBALS["shariff3UUoptions"]["version"]) || version_compare($GLOBALS["shariff3UUoptions"]["version"], $code_version) == '-1') {
     /* Start update procedures - Everything that shall be done once after an update goes here */
 
    // Migration < v 1.7
@@ -344,9 +344,8 @@ function shariff3UU_options_section_callback(){
 
 function shariff3UU_options_page(){ 
   $GLOBALS["shariff3UUoptions"]=get_option( 'shariff3UU' );
-  $version_title = substr_replace($GLOBALS["shariff3UUoptions"]["version"], ".", 3, 0);
   /* The <div> with the class "wrap" makes sure that messages are displayed below the title and not above */
-  echo '<div class="wrap"><h2>Shariff ' . $version_title . '</h2><form action="options.php" method="post">';
+  echo '<div class="wrap"><h2>Shariff ' . $GLOBALS["shariff3UUoptions"]["version"] . '</h2><form action="options.php" method="post">';
   settings_fields( 'pluginPage' );
   do_settings_sections( 'pluginPage' );
   submit_button();
