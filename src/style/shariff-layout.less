@@ -102,12 +102,23 @@
         }
     }
 
+    // ------------------------- default design
+
+    .theme-default {
+        .shariff-button {
+            a {
+                color: #fff;
+            }
+        }
+    }
+
     // ------------------------- colourless design
 
     .theme-grey {
         .shariff-button {
             a {
                 background-color: #b0b0b0;
+                color: #fff;
             }
         }
     }
@@ -154,6 +165,7 @@
         li { 
             background: none;
             .s3uu { vertical-align: baseline; }
+            a { color: #fff; }
         }
         a { 
             text-align: center;
@@ -207,7 +219,10 @@
 
     .orientation-vertical {
 		width: 120px;
-		li { width: 100%; }
+		li { 
+            width: 100%; 
+            a { color: #fff; }
+        }
     }
 	.orientation-vertical.theme-round { width: 50px !important; }
 }
